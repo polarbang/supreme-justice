@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700;900&display=swap');
+
+:root {
+  /* 법대 원목 */
+  --wood-dark: #4a2e1f;
+  --wood: #6b4430;
+  --wood-light: #8a5a3e;
+  /* 법복 */
+  --robe: #1a1a1a;
+  --robe-purple: #5c1f3a;
+  --robe-purple-hover: #74284a;
+  /* 법원 휘장 금색 */
+  --gold: #c9a548;
+  --gold-soft: #e2c97e;
+  /* 사건기록 종이 */
+  --paper: #f5f0e1;
+  --paper-line: #ddd3b8;
+  --ink: #23201b;
+  --ink-soft: #5a5246;
+
+  --correct: #2f6b3a;
+  --wrong: #9b2c2c;
+
+  --font-body: 'Noto Sans KR', system-ui, sans-serif;
+  --font-title: 'Noto Serif KR', serif;
+  --radius: 4px;
+  --pixel-border: 2px solid var(--gold);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { margin: 0; min-height: 100%; }
+
+body {
+  background: var(--wood-dark);
+  color: var(--paper);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-title); margin: 0; }
+
+button { font: inherit; cursor: pointer; }
+
+.character { image-rendering: auto; user-select: none; -webkit-user-drag: none; }

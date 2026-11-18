@@ -1,0 +1,171 @@
+/* ───────── 능력치 · 요일 · 주말 활동 ───────── */
+
+.profile-day {
+  margin-left: 10px;
+  color: var(--paper);
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+}
+
+/* 프로필 카드 하단: 능력치 4개 (넓은 화면 2열, 좁은 화면 1열) */
+.stat-bars {
+  flex-basis: 100%;
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid rgba(201, 165, 72, 0.35);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 20px;
+}
+.profile { flex-wrap: wrap; }
+.stat-bar {
+  display: grid;
+  grid-template-columns: 3.4em 1fr 2em;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+.stat-bar-name { opacity: 0.85; }
+.stat-bar-value {
+  text-align: right;
+  font-family: var(--font-title);
+  color: var(--gold-soft);
+  font-variant-numeric: tabular-nums;
+}
+.stat-bar-track {
+  position: relative;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(201, 165, 72, 0.35);
+}
+.stat-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--bar, var(--gold));
+  transition: width 0.6s ease;
+}
+.stat-insight { --bar: #7f9fd1; }
+.stat-network { --bar: #c9a548; }
+.stat-reputation { --bar: #b98bd0; }
+.stat-health { --bar: #7fbf8a; }
+.stat-health.is-low { --bar: #d9a441; }
+.stat-health.is-critical { --bar: #d96a5a; }
+.stat-health.is-low .stat-bar-value { color: #f0b9a8; }
+
+@media (max-width: 520px) {
+  .stat-bars { grid-template-columns: 1fr; }
+}
+
+/* 능력치 효과 발동 안내: 담담한 한 줄 */
+.effect-note {
+  margin: 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--gold);
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--gold-soft);
+  font-size: 0.9rem;
+  animation: fade-up 0.4s both;
+}
+.judgment .effect-note { margin-bottom: 4px; }
+
+/* 다시 고르기: 앞서 고른 오답은 선택 불가 */
+.choice.is-blocked {
+  opacity: 0.45;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+/* 주말 */
+.weekend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fade-up 0.4s both;
+}
+.weekend-head {
+  border-left: 4px solid var(--gold);
+  padding-left: 12px;
+}
+.weekend-title {
+  margin: 2px 0 0;
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: var(--paper);
+}
+.weekend-last,
+.weekend-warn {
+  margin: 6px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+.weekend-warn { color: #f0b9a8; opacity: 1; }
+
+.activity-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 520px) {
+  .activity-list { grid-template-columns: 1fr; }
+}
+.activity {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid transparent;
+  padding: 12px 14px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s, border-color 0.12s;
+}
+.activity:hover,
+.activity:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  outline: none;
+}
+/* 오르는 능력치 pill: 그 능력치 색 */
+.activity .effect.stat-pill {
+  background: color-mix(in srgb, var(--bar) 18%, #fff);
+  color: color-mix(in srgb, var(--bar) 75%, #000);
+}
+.activity-insight { --bar: #5f83c0; }
+.activity-network { --bar: #b8902e; }
+.activity-reputation { --bar: #9a6bb8; }
+.activity-health { --bar: #5aa36a; }
+.activity-name {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+.activity-desc {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.activity-effects {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+/* 능력치 변화 표시: 둥근 알약 대신 각진 사각형 (테두리가 설명글과 딱 맞아 보이게) */
+.effect {
+  padding: 1px 8px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+.effect.up { background: #e3efe2; color: var(--correct); }
+.effect.down { background: #f4e1df; color: var(--wrong); }
+
+@media (prefers-reduced-motion: reduce) {
+  .effect-note, .weekend { animation: none; }
+  .stat-bar-fill { transition: none; }
+}

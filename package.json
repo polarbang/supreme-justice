@@ -1,0 +1,48 @@
+{
+  "name": "supreme-justice",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "assets:characters": "tsx scripts/process-characters.ts",
+    "data:fetch": "tsx scripts/fetch-precedents.ts",
+    "data:convert": "tsx scripts/convert-with-gemini.ts",
+    "data:rebalance": "tsx scripts/rebalance-choices.ts",
+    "data:validate": "tsx scripts/validate-cases.ts",
+    "data:build": "tsx scripts/build-cases.ts",
+    "data:persona": "tsx scripts/assign-persona.ts",
+    "data:avatars": "tsx scripts/assign-party-avatars.ts",
+    "data:laws": "tsx scripts/check-law-links.ts",
+    "data:details": "tsx scripts/add-details.ts",
+    "docs:events": "tsx scripts/export-events.ts",
+    "docs:badges": "tsx scripts/export-badges.ts",
+    "assets:badges": "tsx scripts/process-badges.ts"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@google/genai": "^1.0.0",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "dotenv": "^16.5.0",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "sharp": "^0.34.1",
+    "tsx": "^4.19.4",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5"
+  }
+}

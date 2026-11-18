@@ -1,0 +1,472 @@
+/* ───────── 집무실: 프로필 ───────── */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(180deg, #3a2417, #23160e);
+  border: 2px solid var(--gold);
+  padding: 12px 16px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+.profile-portrait {
+  flex-shrink: 0;
+  width: 64px;
+  height: 84px;
+  display: grid;
+  place-items: end center;
+}
+.profile-character {
+  max-height: 84px;
+  max-width: 64px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+  animation: rank-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+.profile-level {
+  font-size: 0.75rem;
+  color: var(--gold-soft);
+  letter-spacing: 0.15em;
+}
+.profile-rank {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  animation: fade-up 0.5s;
+}
+.profile-note {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+.pips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+.pips-label {
+  width: 52px;
+  opacity: 0.8;
+}
+.pips-row {
+  display: flex;
+  gap: 4px;
+}
+.pip {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--gold);
+  transform: rotate(45deg) scale(0.8);
+  transition: background 0.3s, transform 0.3s;
+}
+.pips-up .pip.on {
+  background: var(--gold);
+  transform: rotate(45deg) scale(0.9);
+}
+.pips-down .pip {
+  border-color: #c96b6b;
+}
+.pips-down .pip.on {
+  background: #c96b6b;
+}
+.pips-count {
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes rank-pop {
+  from { opacity: 0; transform: scale(0.6) translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ───────── 게임 안내 · 직급표 ───────── */
+.guide {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(201, 165, 72, 0.4);
+  padding: 16px;
+}
+.guide-title {
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.guide-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+.guide-body p {
+  margin: 0 0 8px;
+}
+.guide-body ul {
+  margin: 0 0 8px;
+  padding-left: 18px;
+}
+.guide-body strong {
+  color: var(--gold-soft);
+}
+.guide-subtitle {
+  font-size: 1rem;
+  color: var(--gold);
+  margin: 16px 0 8px;
+}
+.ladder {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column-reverse; /* 대법원장이 위 */
+  gap: 4px;
+}
+.ladder-row {
+  display: grid;
+  grid-template-columns: 40px 32px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+}
+.ladder-row.current {
+  border-color: var(--gold);
+  background: rgba(92, 31, 58, 0.55);
+}
+.ladder-lv {
+  font-size: 0.75rem;
+  color: var(--gold-soft);
+}
+.ladder-img {
+  height: 36px;
+  width: 32px;
+  object-fit: contain;
+}
+.ladder-row.locked .ladder-img {
+  filter: brightness(0) opacity(0.45);
+}
+.ladder-row.locked .ladder-name {
+  opacity: 0.6;
+}
+.ladder-name {
+  font-family: var(--font-title);
+  font-weight: 600;
+}
+.ladder-rule {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-align: right;
+}
+
+/* ───────── 사건 (집무실 안에서 펼쳐짐) ───────── */
+.scroll-anchor {
+  scroll-margin-top: 12px;
+}
+.case-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fade-up 0.4s;
+}
+.case-heading {
+  border-left: 4px solid var(--gold);
+  padding-left: 12px;
+}
+.case-label {
+  font-size: 0.75rem;
+  color: var(--gold-soft);
+  letter-spacing: 0.2em;
+}
+.case-title {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--paper);
+  word-break: keep-all;
+}
+.choice:disabled {
+  cursor: default;
+}
+.choice.is-answer {
+  border-color: var(--correct);
+  background: #e3efe2;
+}
+.choice.is-answer .choice-id {
+  background: var(--correct);
+  border-color: var(--correct);
+  color: var(--paper);
+}
+.choice.is-wrong-pick {
+  border-color: var(--wrong);
+  background: #f3e1e1;
+}
+.choice.is-wrong-pick .choice-id {
+  background: var(--wrong);
+  border-color: var(--wrong);
+  color: var(--paper);
+}
+.choice.is-dim {
+  opacity: 0.55;
+}
+.verdict {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ───────── 엔딩 ───────── */
+.ending {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--gold);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ending h2 {
+  color: var(--gold);
+}
+.ending p {
+  margin: 0;
+}
+
+/* ───────── 직급 변동 모달 ───────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(10, 6, 4, 0.78);
+  animation: backdrop-in 0.3s both;
+}
+.rank-modal {
+  width: min(360px, 100%);
+  text-align: center;
+  background: linear-gradient(180deg, #3a2417, #1f130c);
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 0 4px rgba(201, 165, 72, 0.15), 0 20px 40px rgba(0, 0, 0, 0.6);
+  padding: 20px 20px 24px;
+  animation: modal-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.rank-modal.is-demote {
+  border-color: #8a6f6f;
+  background: linear-gradient(180deg, #2c2020, #171111);
+}
+.rank-kicker {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+}
+.is-demote .rank-kicker {
+  color: #d9b3b3;
+}
+.rank-stage {
+  position: relative;
+  height: 220px;
+  margin: 12px 0 8px;
+  overflow: hidden;
+}
+.rank-img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 200px;
+  max-width: 100%;
+  object-fit: contain;
+}
+.rank-from {
+  animation: rank-out 0.7s 0.35s ease-in both;
+}
+.rank-to {
+  animation: rank-in 0.8s 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.is-promote .rank-to {
+  filter: drop-shadow(0 0 16px rgba(226, 201, 126, 0.75));
+}
+.is-demote .rank-from {
+  animation-name: rank-out-down;
+}
+.is-demote .rank-to {
+  animation-name: rank-in-down;
+}
+.rank-rays {
+  position: absolute;
+  inset: -40%;
+  background: repeating-conic-gradient(from 0deg, rgba(226, 201, 126, 0.22) 0deg 10deg, transparent 10deg 24deg);
+  mask-image: radial-gradient(circle, #000 25%, transparent 62%);
+  -webkit-mask-image: radial-gradient(circle, #000 25%, transparent 62%);
+  animation: rays-in 0.6s 0.9s both, rays-spin 14s 0.9s linear infinite;
+}
+.rank-names {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0;
+  font-family: var(--font-title);
+}
+.rank-old {
+  opacity: 0.6;
+  text-decoration: line-through;
+  text-decoration-color: transparent;
+  animation: strike 0.4s 0.6s forwards;
+}
+.rank-arrow {
+  font-size: 0.8rem;
+  color: var(--gold);
+}
+.is-demote .rank-arrow {
+  color: #c96b6b;
+}
+.rank-new {
+  font-size: 1.35rem;
+  color: var(--gold);
+  animation: fade-up 0.5s 1.3s both;
+}
+.is-demote .rank-new {
+  color: #e8d4d4;
+}
+.rank-msg {
+  margin: 4px 0 16px;
+  font-size: 0.95rem;
+  animation: fade-up 0.5s 1.5s both;
+}
+.rank-ok {
+  min-width: 140px;
+  animation: fade-up 0.4s 1.6s both;
+}
+
+@keyframes backdrop-in { from { opacity: 0; } }
+@keyframes modal-in { from { opacity: 0; transform: scale(0.85); } }
+@keyframes rank-out {
+  to { opacity: 0; transform: translateY(-12px) scale(0.85); filter: brightness(2) blur(2px); }
+}
+@keyframes rank-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.6); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes rank-out-down {
+  to { opacity: 0; transform: translateY(20px) scale(0.9); filter: grayscale(1) brightness(0.5); }
+}
+@keyframes rank-in-down {
+  from { opacity: 0; transform: translateY(-24px) scale(1.05); filter: grayscale(1); }
+  to { opacity: 1; transform: none; filter: grayscale(0.35); }
+}
+@keyframes rays-in { from { opacity: 0; transform: scale(0.5); } }
+@keyframes rays-spin { to { rotate: 360deg; } }
+@keyframes strike { to { text-decoration-color: currentColor; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-character, .profile-rank, .case-panel, .modal-backdrop, .rank-modal,
+  .rank-from, .rank-to, .rank-rays, .rank-new, .rank-msg, .rank-ok, .rank-old {
+    animation-duration: 0.01s !important;
+    animation-delay: 0s !important;
+  }
+  .rank-rays { animation: none; }
+}
+
+/* 좁은 화면: 통계를 프로필 카드 아래 한 줄로 */
+@media (max-width: 520px) {
+  .profile { flex-wrap: wrap; }
+  .profile .stats {
+    flex-basis: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 8px 0 0;
+    border-left: none;
+    border-top: 1px solid rgba(201, 165, 72, 0.35);
+  }
+  .profile .stat { justify-content: center; gap: 8px; }
+}
+
+@media (max-width: 420px) {
+  .case-title { font-size: 1.1rem; }
+  .ladder-row { grid-template-columns: 36px 28px 1fr; }
+  .ladder-rule { grid-column: 3; text-align: left; margin-top: -6px; }
+}
+
+/* ───────── 상단 제목 ───────── */
+.app-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0 10px;
+  border-bottom: 1px solid rgba(201, 165, 72, 0.35);
+}
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(1.5rem, 6.5vw, 2rem);
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+.app-emblem {
+  font-size: 0.85em;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: center;
+}
+.mute-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid rgba(201, 165, 72, 0.5);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--gold-soft);
+}
+.mute-btn:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+.mute-btn[aria-pressed='true'] {
+  opacity: 0.6;
+}
+.app-header .header-label {
+  margin-left: 0;
+  white-space: nowrap;
+  animation: fade-up 0.4s; /* 집무실 ↔ 재판장 전환 */
+}
+
+/* ───────── 사건개요: 핵심 사실 목록 ───────── */
+.fact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fact-list li {
+  position: relative;
+  padding-left: 18px;
+}
+.fact-list li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.68em;
+  width: 7px;
+  height: 7px;
+  background: var(--robe-purple);
+  transform: rotate(45deg);
+}

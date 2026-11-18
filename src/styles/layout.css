@@ -1,0 +1,689 @@
+/* ───────── 대시보드 배치: 상단 바 + 3단(왼쪽 신분·상태 / 가운데 재판 / 오른쪽 기록) ───────── */
+
+.screen.dashboard {
+  max-width: 720px;
+}
+
+/* 상단 바 */
+.topbar {
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 6px;
+}
+.topbar .app-title {
+  font-size: clamp(1.4rem, 5.5vw, 1.8rem);
+}
+.topbar-progress {
+  order: 3;
+  flex-basis: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+.topbar-status strong {
+  color: var(--gold-soft);
+  font-family: var(--font-title);
+}
+.topbar-bar {
+  position: relative;
+  height: 6px;
+  min-width: 60px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(201, 165, 72, 0.35);
+}
+.topbar-bar > span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--gold);
+  transition: width 0.6s ease;
+}
+.topbar-goal {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* 칸 */
+.dash {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.dash-left,
+.dash-right,
+.dash-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* 공통 카드 */
+.dash-card {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(201, 165, 72, 0.4);
+  padding: 14px 16px;
+}
+.dash-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.dash-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--gold);
+}
+.dash-card-sub {
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+.dash-empty {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* 법관 신분증 */
+.idcard {
+  padding: 0;
+  background: linear-gradient(180deg, #3a2417, #23160e);
+  border: 2px solid var(--gold);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+.idcard-strip {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: var(--robe-purple);
+  color: var(--gold-soft);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+}
+.idcard-body {
+  display: flex;
+  gap: 14px;
+  padding: 12px 14px 4px;
+}
+.idcard-photo {
+  flex-shrink: 0;
+  width: 64px;
+  height: 84px;
+  display: grid;
+  place-items: end center;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(201, 165, 72, 0.35);
+}
+.idcard-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* 근무처·경력: 사진 오른쪽, 한 줄 */
+.idcard-fields {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 2px 8px;
+  margin: 0;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.idcard-fields dt {
+  opacity: 0.65;
+}
+.idcard-fields dd {
+  margin: 0;
+}
+.idcard-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 14px 10px;
+}
+
+/* 상태 카드: 능력치 막대 + 판결·적중·적중률 */
+.status-card .stat-bars {
+  margin: 0;
+  padding: 0;
+  border-top: none;
+  grid-template-columns: 1fr;
+}
+.status-card .stats {
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 12px;
+  padding: 10px 0 0;
+  border-left: none;
+  border-top: 1px solid rgba(201, 165, 72, 0.35);
+}
+.status-card .stat {
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* 오늘의 재판 (사건 배당 전) */
+.today-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.today-card .dash-card-head {
+  margin-bottom: 0;
+}
+.today-text {
+  margin: 0;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+/* 경력 지도 */
+/* 네모 격자: 한 줄 10칸 */
+.cmap {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+}
+.cmap-cell {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  min-height: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(201, 165, 72, 0.18);
+}
+.cmap-cell.is-ok { background: #4f9a5c; border-color: #4f9a5c; }
+.cmap-cell.is-miss { background: #b54a4a; border-color: #b54a4a; }
+/* 진급·강등한 날: 칸 안 작은 마름모 */
+.cmap-cell.has-promote::after,
+.cmap-cell.has-demote::after {
+  content: '';
+  position: absolute;
+  inset: 28%;
+  transform: rotate(45deg);
+  background: var(--gold-soft);
+}
+.cmap-cell.has-demote::after {
+  background: #1a1a1a;
+  box-shadow: 0 0 0 1px rgba(226, 201, 126, 0.6);
+}
+.cmap-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 10px 0 0;
+  padding: 0;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+.cmap-legend li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.cmap-legend .cmap-cell {
+  width: 12px;
+  min-height: 0;
+}
+
+/* 판결 기록 */
+.log-days {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.log-day {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(201, 165, 72, 0.2);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.log-day:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.log-when {
+  opacity: 0.6;
+  font-size: 0.75rem;
+  padding-top: 2px;
+}
+.log-entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  word-break: keep-all;
+}
+.log-tag {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 1px solid currentColor;
+}
+.log-entry.is-ok .log-tag { color: #8fd19e; }
+.log-entry.is-miss .log-tag { color: #f19a9a; }
+.log-entry.is-effect,
+.log-entry.is-activity {
+  opacity: 0.75;
+}
+.log-entry.is-promote { color: var(--gold-soft); font-weight: 700; }
+.log-entry.is-demote { color: #f19a9a; font-weight: 700; }
+.log-more {
+  margin-top: 6px;
+  font-size: 0.85rem;
+}
+
+/* 좁은 화면에서 재판 중에는 경력 지도·게임 안내 숨김 (사건에 집중) */
+@media (max-width: 1099px) {
+  .dashboard.is-trial .career-map,
+  .dashboard.is-trial .guide {
+    display: none;
+  }
+}
+
+/* 넓은 화면: 3단 */
+@media (min-width: 1100px) {
+  /* 본문 폭 1320px 고정(가운데 칸 약 660px), 남는 폭은 좌우 여백 */
+  .screen.dashboard {
+    max-width: 1368px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .topbar {
+    flex-wrap: nowrap;
+  }
+  .topbar-progress {
+    order: 0;
+    flex: 1;
+    flex-basis: auto;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .dash {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr) 320px;
+    gap: 22px;
+    align-items: start;
+  }
+  .dash-left {
+    position: sticky;
+    top: 16px;
+  }
+}
+
+/* 좁은 화면: 칸 구분 없이 한 줄로
+   오늘의 재판(재판 중엔 사건) → 법관 신분 기록 → 상태 → 인생 기록 → 경력 지도 → 게임 안내 → 기록 초기화 */
+@media (max-width: 1099px) {
+  .dash-left,
+  .dash-main,
+  .dash-right {
+    display: contents;
+  }
+  .idcard { order: 1; }
+  .status-card { order: 2; }
+  .achievements { order: 3; }
+  .case-log { order: 4; }
+  .career-map { order: 5; }
+  .guide { order: 6; }
+  .reset-link { order: 7; }
+}
+
+/* 오른쪽 칸의 직급표: 직급명과 진급 목표를 두 줄로, 두 줄 높이 = 직급 그림 높이 */
+.dash-right .ladder-row {
+  grid-template-columns: 36px 32px 1fr;
+  grid-template-rows: auto auto;
+  row-gap: 3px;
+  align-items: center;
+}
+.dash-right .ladder-lv,
+.dash-right .ladder-img {
+  grid-row: 1 / span 2;
+}
+.dash-right .ladder-name {
+  grid-column: 3;
+  align-self: end;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.dash-right .ladder-rule {
+  grid-column: 3;
+  align-self: start;
+  text-align: left;
+  margin: 0;
+  line-height: 1.2;
+  font-size: 0.68rem;
+}
+
+/* 상태 설명 (여닫이) */
+.stat-guide {
+  margin-top: 10px;
+  font-size: 0.85rem;
+}
+.stat-guide summary {
+  cursor: pointer;
+  color: var(--gold-soft);
+  opacity: 0.85;
+}
+.stat-guide summary:hover {
+  opacity: 1;
+}
+.stat-guide-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 10px;
+  margin: 10px 0 0;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+.stat-guide-list dt {
+  font-weight: 700;
+  color: var(--bar, var(--gold-soft));
+}
+.stat-guide-list dd {
+  margin: 0;
+}
+
+/* 판결 후 버튼: 집무실로 돌아가기 하나 */
+.verdict-actions.is-single {
+  grid-template-columns: 1fr;
+}
+
+/* 인생 기록: 기습 일정 · 들통 */
+.log-entry.is-event {
+  color: #d9c8f0;
+}
+.log-entry.is-scandal {
+  color: #f19a9a;
+  font-weight: 700;
+}
+
+/* 기습 이벤트 창 */
+.surprise-modal {
+  width: min(420px, 100%);
+  background: linear-gradient(180deg, #3a2417, #1f130c);
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 0 4px rgba(201, 165, 72, 0.15), 0 20px 40px rgba(0, 0, 0, 0.6);
+  padding: 0 0 18px;
+  animation: modal-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.surprise-modal.is-temptation {
+  border-color: #8a6f6f;
+  background: linear-gradient(180deg, #2c2020, #171111);
+}
+.surprise-kicker {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 16px;
+  background: var(--robe-purple);
+  color: var(--gold-soft);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+}
+.is-temptation .surprise-kicker {
+  background: #4a2626;
+  color: #f0c4c4;
+}
+.surprise-title {
+  margin: 14px 16px 6px;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: var(--gold);
+  word-break: keep-all;
+}
+.surprise-desc,
+.surprise-result {
+  margin: 0 16px;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+.surprise-result {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(201, 165, 72, 0.35);
+}
+.surprise-exposed {
+  color: #f19a9a;
+}
+.surprise-options {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin: 12px 16px 0;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 0.9rem;
+}
+.surprise-options dt {
+  opacity: 0.7;
+}
+.surprise-options dd {
+  margin: 0;
+}
+.surprise-risk {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: #f0b9a8;
+}
+.surprise-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 16px 16px 0;
+}
+.surprise-effects {
+  margin: 10px 16px 0;
+}
+.surprise-none {
+  margin: 10px 16px 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.surprise-ok {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 16px 16px 0;
+}
+
+/* 인생 기록: 연차 머리글 (옅은 회색, 본문보다 작게) · 첫 배정 기록 */
+.log-year {
+  grid-column: 1 / -1;
+  font-size: 0.72rem;
+  color: rgba(245, 240, 225, 0.45);
+  letter-spacing: 0.08em;
+}
+.log-entry.is-start {
+  color: var(--gold-soft);
+}
+.log-entry.is-retire {
+  color: var(--gold-soft);
+  font-weight: 700;
+}
+
+/* 신분증 위쪽 띠의 남/여 선택 */
+.idcard-strip {
+  align-items: center;
+}
+.gender-toggle {
+  display: inline-flex;
+  border: 1px solid rgba(226, 201, 126, 0.5);
+  border-radius: 999px;
+  overflow: hidden;
+  letter-spacing: 0;
+}
+.gender-toggle button {
+  padding: 0 9px;
+  border: none;
+  background: transparent;
+  color: var(--gold-soft);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  opacity: 0.6;
+}
+.gender-toggle button:hover {
+  opacity: 1;
+}
+.gender-toggle button.is-on {
+  background: var(--gold-soft);
+  color: var(--robe-purple);
+  font-weight: 700;
+  opacity: 1;
+}
+/* 활동 꼬리표는 좋고 나쁨이 없어 금색 */
+.log-entry.is-activity .log-tag {
+  color: var(--gold-soft);
+}
+/* 일반 기습 일정 꼬리표("일정")도 좋고 나쁨이 없어 금색 */
+.log-entry.is-event.is-schedule .log-tag {
+  color: var(--gold-soft);
+}
+
+/* ───────── 업적 ───────── */
+.badge-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 8px;
+}
+.badge-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.badge-name {
+  font-size: 0.72rem;
+  line-height: 1.3;
+  word-break: keep-all;
+  opacity: 0.55;
+}
+.badge-cell.is-on .badge-name {
+  opacity: 1;
+  color: var(--gold-soft);
+}
+/* 못 얻은 업적: 뱃지 윤곽만 (실루엣) */
+.badge-cell:not(.is-on) .badge-img,
+.badge-cell:not(.is-on) .badge-placeholder {
+  filter: brightness(0) opacity(0.35);
+}
+.badge-img {
+  display: block;
+  object-fit: contain;
+}
+/* 뱃지 그림이 아직 없을 때 */
+.badge-placeholder {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: var(--font-title);
+  font-weight: 900;
+  color: #2a1a10;
+  border: 3px double rgba(0, 0, 0, 0.35);
+}
+.badge-placeholder.tone-good { background: radial-gradient(circle at 35% 30%, #f6e2a0, #c9a548); }
+.badge-placeholder.tone-neutral { background: radial-gradient(circle at 35% 30%, #eceff3, #a9b0bb); }
+.badge-placeholder.tone-bad { background: radial-gradient(circle at 35% 30%, #e7a49a, #8e3a32); color: #fff3ef; }
+
+/* 업적 해금 팝업 */
+.achv-modal {
+  width: min(320px, 100%);
+  text-align: center;
+  background: linear-gradient(180deg, #3a2417, #1f130c);
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 0 4px rgba(201, 165, 72, 0.15), 0 20px 40px rgba(0, 0, 0, 0.6);
+  padding: 18px 20px 20px;
+  animation: modal-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.achv-modal.tone-bad {
+  border-color: #8a6f6f;
+  background: linear-gradient(180deg, #2c2020, #171111);
+}
+.achv-kicker {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-soft);
+}
+.achv-badge {
+  display: grid;
+  place-items: center;
+  margin: 14px 0 10px;
+  animation: achv-pop 0.45s 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.achv-name {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+.achv-cond {
+  margin: 6px 0 0;
+  font-size: 0.88rem;
+  opacity: 0.8;
+  word-break: keep-all;
+}
+.achv-ok {
+  margin-top: 16px;
+  min-width: 120px;
+}
+
+@keyframes achv-pop {
+  from { transform: scale(0.4); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.badge-more {
+  display: block;
+  margin: 12px auto 0;
+  font-size: 0.85rem;
+}
+
+/* 신분증: 판사 이름 (눌러서 바꾸기) */
+.name-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--paper);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.name-btn span {
+  font-weight: 400;
+  opacity: 0.45;
+}
+.name-btn:hover span {
+  opacity: 1;
+}
+.name-btn.is-empty {
+  color: var(--gold-soft);
+  font-weight: 400;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+.name-input {
+  width: 9em;
+  padding: 0 4px;
+  border: 1px solid var(--gold-soft);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--paper);
+  font: inherit;
+}
