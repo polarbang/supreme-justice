@@ -167,6 +167,17 @@ export const ACHIEVEMENTS: Achievement[] = [
     motif: 'a black judge robe neatly draped over the back of an empty wooden chair, a small farewell flower bouquet resting on the seat',
     check: (x) => !!x.p.retired,
   },
+  {
+    id: 'exit-politics', name: '이제는 정치인', group: '경력', tone: 'neutral', condition: '국회의원 당선 또는 입각으로 정계 진출',
+    motif: 'a chibi character in a dark suit with a shiny round gold lapel pin, waving from a small podium, a black judge robe hanging on a coat stand behind it',
+    // 총선 낙선은 정계 진출로 치지 않음
+    check: (x) => x.p.exit?.kind === 'politics' && x.p.exit.ending !== 'lost',
+  },
+  {
+    id: 'exit-lawfirm', name: '돈이 좋아', group: '경력', tone: 'bad', condition: '법복을 벗고 대형 로펌 파트너 되기',
+    motif: 'a chibi character tossing a black judge robe aside while picking up a sleek leather briefcase with bundles of cash peeking out of it',
+    check: (x) => x.p.exit?.kind === 'lawfirm',
+  },
 
   // ───────── 능력치 ─────────
   {

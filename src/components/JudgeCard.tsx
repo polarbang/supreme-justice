@@ -91,7 +91,13 @@ export default function JudgeCard({ progress, onGender, onName }: Props) {
       </div>
       <div className="idcard-progress">
         {finished ? (
-          <span className="profile-note">{progress.retired ? '정년 퇴임했습니다' : '최고 직급에 올랐습니다'}</span>
+          <span className="profile-note">{progress.exit?.kind === 'politics'
+              ? '법복을 벗고 정계로 떠났습니다'
+              : progress.exit?.kind === 'lawfirm'
+                ? '법복을 벗고 로펌으로 떠났습니다'
+                : progress.retired
+                  ? '정년 퇴임했습니다'
+                  : '최고 직급에 올랐습니다'}</span>
         ) : (
           <>
             <Pips label="진급까지" filled={progress.levelCorrect} total={PROMOTE_REQUIRED[progress.rankIndex]} kind="up" />

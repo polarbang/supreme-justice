@@ -7,6 +7,7 @@ import { writeFileSync } from 'node:fs';
 import { RANK_NAMES } from '../src/game/rankNames';
 import { STAT_NAMES, type StatId } from '../src/game/stats';
 import {
+  EXITS,
   POLITICAL_EVENTS,
   SURPRISE_COOLDOWN_CYCLES,
   SURPRISE_COST,
@@ -41,7 +42,10 @@ function eventRow(e: SurpriseEvent) {
       ? `${s(e.main)} +${TEMPT_GAIN}, 평판 −${TEMPT_COST} (알려지면 평판 −${TEMPT_COST} 추가)`
       : `${s(e.main)} +${SURPRISE_GAIN}, ${s(e.cost)} −${SURPRISE_COST}`;
   const decline = e.declineCost ? `${s(e.declineCost)} −${SURPRISE_COST}` : '변화 없음';
-  return `| ${rankRange(e.minRank, e.maxRank)} | **${cell(e.name)}** | ${cell(e.description)} | ${accept} | ${decline} |`;
+  const exit = EXITS[e.id];
+  const exitNote = exit ? `<br>**${exit.chance >= 1 ? '' : `${pct(exit.chance)} 확률로 `}법복을 벗고 떠남: ${exit.endings.map((x) => x.title).join(' / ')}${exit.endings.length > 1 ? ' 각 ' + pct(1 / exit.endings.length) : ''}**` : '';
+  const req = e.requires ? `<br>(${SURPRISE_EVENTS.find((x) => x.id === e.requires)!.name}을 수락한 판에서만)` : '';
+  return `| ${rankRange(e.minRank, e.maxRank)} | **${cell(e.name)}**${req} | ${cell(e.description)} | ${accept}${exitNote} | ${decline} |`;
 }
 
 // 모든 직급 이벤트를 먼저, 나머지는 낮은 직급부터
@@ -84,6 +88,7 @@ const md = `# 이벤트 표
 | 유혹 이벤트 비중 | 그날 뽑히는 이벤트의 약 ${pct(TEMPT_SHARE)} |
 | 반복 방지 | 같은 이벤트는 사건 ${SURPRISE_COOLDOWN_CYCLES * 3}건(${SURPRISE_COOLDOWN_CYCLES}바퀴) 안에 다시 나오지 않음. 정치권 제안(${[...POLITICAL_EVENTS].map((id) => SURPRISE_EVENTS.find((e) => e.id === id)!.name).join(', ')})은 한 판에 한 번씩만 |
 | 건강 40 미만 | 참여 시 건강이 깎이는 이벤트는 나오지 않음 |
+| 중도 퇴장 엔딩 | 일부 제안은 응하면 법복을 벗고 떠나 게임이 끝남 (정계 진출·로펌 파트너). 표의 "참여하면" 칸에 표시 |
 
 ### 일반 이벤트 (${normal.length}개)
 

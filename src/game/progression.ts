@@ -1,7 +1,7 @@
 import type { Gender } from './ranks';
 import { CORRECT_INSIGHT_GAIN, INITIAL_STATS, MAX_CHANCE, VERDICT_HEALTH_COST, applyEffects, rollEffect, type Stats } from './stats';
 import { pickPost } from './posts';
-import { pickSurprise, POLITICAL_EVENTS, scheduleCycle, SURPRISE_EVENTS, surpriseEffects, TEMPT_EXPOSE_CHANCE, type SurpriseEvent } from './surpriseEvents';
+import { EXITS, type ExitKind, pickSurprise, POLITICAL_EVENTS, scheduleCycle, SURPRISE_EVENTS, surpriseEffects, TEMPT_EXPOSE_CHANCE, type SurpriseEvent } from './surpriseEvents';
 import { activityEffects, pickWeekendChoices, WEEKEND_ACTIVITIES, type WeekendActivity } from './weekendActivities';
 
 /** 직급(index 0~6)별 진급에 필요한 적중 수. 7번 진급하면 대법원장(index 7) → 게임 클리어 */
@@ -29,8 +29,8 @@ export const DEMOTE_WRONG = 2;
 /** 강등은 Lv2~Lv7(index 1~6)에만 존재. Lv1은 더 내려갈 곳이 없고 Lv8은 게임 종료 */
 export const canDemote = (rankIndex: number) => rankIndex >= 1 && rankIndex < MAX_RANK;
 export const isFinished = (rankIndex: number) => rankIndex >= MAX_RANK;
-/** 게임 끝: 대법원장 취임 또는 정년 퇴임 */
-export const isOver = (p: { rankIndex: number; retired?: boolean }) => isFinished(p.rankIndex) || !!p.retired;
+/** 게임 끝: 대법원장 취임, 정년 퇴임, 또는 제안에 응해 법복을 벗음(정계·로펌) */
+export const isOver = (p: { rankIndex: number; retired?: boolean; exit?: unknown }) => isFinished(p.rankIndex) || !!p.retired || !!p.exit;
 
 /**
  * 진행 단위(한 바퀴): 사건 3건을 판결하면 활동 하나를 고른다.
@@ -75,6 +75,8 @@ export interface Progress {
   highestRank: number;
   /** 정년(60세)으로 퇴임해 게임이 끝났는지 */
   retired?: boolean;
+  /** 제안에 응해 법복을 벗고 떠나 게임이 끝났는지 (정계 진출·로펌 파트너) */
+  exit?: { kind: ExitKind; eventId: string; ending?: string };
   /** 현재 근무처 (직급이 바뀔 때 posts.ts에서 새로 배정) */
   post: string;
   /** 현재 직급에서의 적중/오판 수 — 직급이 바뀌면 0으로 초기화 */
@@ -275,7 +277,7 @@ export function applyActivity(p: Progress, activityId: string, rand = Math.rando
 
 /** 사건 차례 시작: 이번이 기습 이벤트 차례면 이벤트 하나를 띄운다 */
 export function arriveWeekday(p: Progress, rand: () => number = Math.random): Progress {
-  if (p.retired || isActivityTime(p.day) || p.surprise || !p.surpriseDays.includes(p.day)) return p;
+  if (isOver(p) || isActivityTime(p.day) || p.surprise || !p.surpriseDays.includes(p.day)) return p;
   const surpriseDays = p.surpriseDays.filter((d) => d !== p.day);
   const e = pickSurprise(p, rand);
   if (!e) return { ...p, surpriseDays };
@@ -296,6 +298,8 @@ export interface SurpriseOutcome {
   accepted: boolean;
   /** 유혹 이벤트가 바로 알려졌는지 */
   exposed: boolean;
+  /** 이 제안으로 법복을 벗고 떠났으면 그 문장 (게임 끝) */
+  exit?: string;
   effects: Partial<Stats>;
 }
 
@@ -303,11 +307,18 @@ export interface SurpriseOutcome {
 export function applySurprise(p: Progress, accepted: boolean, rand: () => number = Math.random): SurpriseOutcome | undefined {
   const event = currentSurprise(p);
   if (!event) return undefined;
-  const exposed = accepted && event.kind === 'temptation' && rand() < TEMPT_EXPOSE_CHANCE;
+  // 정계·로펌 제안에 응하면 확률에 따라 법복을 벗고 떠남 (떠나면 들통 판정은 없음)
+  const exitRule = accepted ? EXITS[event.id] : undefined;
+  const exit = exitRule && rand() < exitRule.chance ? exitRule : undefined;
+  // 엔딩이 여럿이면(총선 당선·낙선) 같은 확률로 하나
+  const ending = exit && exit.endings[Math.floor(rand() * exit.endings.length)];
+  const exposed = !exit && accepted && event.kind === 'temptation' && rand() < TEMPT_EXPOSE_CHANCE;
   const effects = surpriseEffects(event, accepted, exposed);
   let counters = p.counters ?? {};
   if (event.kind === 'temptation') {
     counters = bump(counters, accepted ? 'temptAccepted' : 'temptDeclined');
+    // 이어지는 제안(requires)용: 어떤 제안을 수락했는지
+    if (accepted) counters = bump(counters, `temptAccepted:${event.id}`);
     if (exposed) counters = bump(counters, 'exposed');
     if (POLITICAL_EVENTS.has(event.id) && !accepted) counters = bump(counters, `politicalDeclined:${event.id}`);
   } else {
@@ -315,5 +326,7 @@ export function applySurprise(p: Progress, accepted: boolean, rand: () => number
       ? bump(counters, 'normalAcceptStreak')
       : { ...bump(counters, 'normalDeclined'), normalAcceptStreak: 0 };
   }
-  return { next: { ...p, stats: applyEffects(p.stats, effects), surprise: undefined, counters }, event, accepted, exposed, effects };
+  const next: Progress = { ...p, stats: applyEffects(p.stats, effects), surprise: undefined, counters };
+  if (exit && ending) next.exit = { kind: exit.kind, eventId: event.id, ending: ending.id };
+  return { next, event, accepted, exposed, effects, exit: ending && `법복을 벗고 ${ending.phrase}.` };
 }

@@ -25,6 +25,35 @@ export const SURPRISE_CHANCE_PER_CYCLE = 0.6;
 const CYCLE_CASES = 3;
 /** 정치권 제안 (한 판에 한 번씩만 등장, 셋 다 거절하면 업적 "여의도 안가요") */
 export const POLITICAL_EVENTS = new Set(['party-recruit', 'power-meeting', 'cabinet']);
+/** 한 판에 한 번씩만 등장하는 이벤트 */
+const ONCE_EVENTS = new Set([...POLITICAL_EVENTS, 'firm-partner']);
+
+/** 응하면 확률에 따라 법복을 벗고 게임이 끝나는 제안 (중도 퇴장 엔딩) */
+export type ExitKind = 'politics' | 'lawfirm';
+/** 중도 퇴장 엔딩 하나: 제목(엔딩 화면·지난 경력)과 "법복을 벗고 …" 뒤에 이어질 말 */
+export interface ExitEnding {
+  id: string;
+  title: string;
+  phrase: string;
+}
+/** 떠나게 되면 endings 중 하나가 같은 확률로 정해진다 (총선: 당선·낙선 반반) */
+export const EXITS: Record<string, { kind: ExitKind; chance: number; endings: ExitEnding[] }> = {
+  'party-recruit': {
+    kind: 'politics',
+    chance: 0.5,
+    endings: [
+      { id: 'won', title: '국회의원 당선', phrase: '총선에 출마해 당선되어 국회의원이 되었습니다' },
+      { id: 'lost', title: '총선 낙선', phrase: '총선에 출마했지만 낙선했습니다' },
+    ],
+  },
+  cabinet: { kind: 'politics', chance: 0.5, endings: [{ id: 'cabinet', title: '입각', phrase: '정부에 들어갔습니다' }] },
+  'firm-partner': { kind: 'lawfirm', chance: 1, endings: [{ id: 'partner', title: '로펌 파트너', phrase: '대형 로펌의 파트너 변호사가 되었습니다' }] },
+};
+/** 저장된 중도 퇴장 정보 → 엔딩 (예전 저장본처럼 ending이 없으면 첫 번째) */
+export const exitEnding = (exit: { eventId: string; ending?: string }): ExitEnding | undefined => {
+  const endings = EXITS[exit.eventId]?.endings;
+  return endings?.find((e) => e.id === exit.ending) ?? endings?.[0];
+};
 
 export interface SurpriseEvent {
   id: string;
@@ -44,6 +73,8 @@ export interface SurpriseEvent {
   exposedText?: string;
   minRank?: number;
   maxRank?: number;
+  /** 이 유혹 제안을 이번 판에 수락한 적이 있어야 등장 */
+  requires?: string;
 }
 
 type Normal = Omit<SurpriseEvent, 'kind'>;
@@ -273,15 +304,15 @@ export const SURPRISE_EVENTS: SurpriseEvent[] = [
     id: 'leak-direction', main: 'network', declineCost: 'network',
     name: '지인 기자의 판결 방향 문의',
     description: '친분 있는 기자가 "판결 방향만 살짝" 알려 달라고 한다. 알려 주면 앞으로 좋은 기사를 써 주겠다고 한다.',
-    acceptText: '지인 기자에게 판결 방향을 귀띔했습니다.', declineText: '판결 방향을 알려 달라는 지인 기자의 부탁을 거절했습니다.',
+    acceptText: '지인 기자에게 판결 방향을 귀띔했습니다.', declineText: '판결 방향을 알려 달라는 기자의 부탁을 거절했습니다.',
     exposedText: '선고 전 판결 방향이 새어 나간 사실이 드러났습니다.',
   }),
   temptation({
     id: 'classmate-lawyer', main: 'network', declineCost: 'network', maxRank: 1,
-    name: '동기 변호사의 "구속만은 피하게"',
-    description: '변호사가 된 연수원 동기가 의뢰인 구속만은 피하게 해 달라고 부탁한다.',
-    acceptText: '동기 변호사의 "구속만은 피하게" 부탁을 들어주었습니다.', declineText: '동기 변호사의 "구속만은 피하게" 부탁을 거절했습니다.',
-    exposedText: '동기 변호사의 부탁을 들어준 사실이 보도되었습니다.',
+    name: '영장심사 전날 걸려 온 동기의 전화',
+    description: '내일 구속영장 심사를 맡은 사건의 변호인이 연수원 동기였다. 밤늦게 전화해 "영장만은 기각해 달라"고 한다.',
+    acceptText: '동기의 부탁대로 구속영장을 기각했습니다.', declineText: '동기의 부탁을 거절했습니다.',
+    exposedText: '변호인인 동기의 부탁을 받고 구속영장을 기각한 사실이 보도되었습니다.',
   }),
   temptation({
     id: 'firm-offer', main: 'network', maxRank: 3,
@@ -289,6 +320,13 @@ export const SURPRISE_EVENTS: SurpriseEvent[] = [
     description: '대형 로펌이 퇴직하면 좋은 자리를 마련해 두겠다며 물밑으로 연락해 왔다. 그 로펌 사건도 맡고 있다.',
     acceptText: '대형 로펌의 퇴직 후 자리 약속에 긍정적으로 답했습니다.', declineText: '대형 로펌의 퇴직 후 자리 약속을 거절했습니다.',
     exposedText: '재판 중인 사건의 로펌과 퇴직 후 자리를 논의한 사실이 보도되었습니다.',
+  }),
+  temptation({
+    id: 'firm-partner', main: 'network', minRank: 3, requires: 'firm-offer',
+    name: '대형 로펌의 파트너 영입 제안',
+    description: '퇴직 후 자리를 약속했던 대형 로펌이 이제 파트너 변호사로 와 달라며 구체적인 조건을 내밀었다.',
+    acceptText: '대형 로펌의 파트너 영입 제안을 받아들였습니다.', declineText: '대형 로펌의 파트너 영입 제안을 거절했습니다.',
+    exposedText: '현직 법관이 로펌과 이직 조건을 논의한 사실이 보도되었습니다.',
   }),
   temptation({
     id: 'party-dinner', main: 'network', minRank: 2, maxRank: 3,
@@ -326,11 +364,11 @@ export const SURPRISE_EVENTS: SurpriseEvent[] = [
     exposedText: '정치권 실세와의 비공개 회동이 보도되었습니다.',
   }),
   temptation({
-    id: 'cabinet', main: 'network', minRank: 6,
+    id: 'cabinet', main: 'network', minRank: 5,
     name: '정부 고위직 입각 타진',
     description: '정부 측에서 총리·장관 자리를 맡을 의향이 있는지 조심스럽게 물어 왔다.',
     acceptText: '정부의 입각 타진에 긍정적으로 답했습니다.', declineText: '정부의 입각 타진을 거절했습니다.',
-    exposedText: '현직 대법관이 입각을 논의한 사실이 보도되었습니다.',
+    exposedText: '현직 고위 법관이 입각을 논의한 사실이 보도되었습니다.',
   }),
   temptation({
     id: 'outside-pressure', main: 'network', declineCost: 'network', minRank: 6,
@@ -353,7 +391,7 @@ export function scheduleCycle(rand: () => number = Math.random, fromDay = 0): nu
 
 /** 오늘 뜰 이벤트: 직급·건강·최근 등장 이력으로 거른 뒤 일반/유혹 중 하나 */
 export function pickSurprise(
-  ctx: { rankIndex: number; stats: Stats; week: number; surpriseSeen: Record<string, number> },
+  ctx: { rankIndex: number; stats: Stats; week: number; surpriseSeen: Record<string, number>; counters?: Record<string, number> },
   rand: () => number = Math.random,
 ): SurpriseEvent | undefined {
   const ok = SURPRISE_EVENTS.filter(
@@ -362,7 +400,9 @@ export function pickSurprise(
       // 건강 40 미만이면 참여 시 건강이 깎이는 이벤트는 빼기
       !(ctx.stats.health < HEALTH_REST_ONLY_BELOW && e.cost === 'health') &&
       !(ctx.surpriseSeen[e.id] !== undefined && ctx.week - ctx.surpriseSeen[e.id] < SURPRISE_COOLDOWN_CYCLES) &&
-      !(POLITICAL_EVENTS.has(e.id) && ctx.surpriseSeen[e.id] !== undefined),
+      !(ONCE_EVENTS.has(e.id) && ctx.surpriseSeen[e.id] !== undefined) &&
+      // 앞선 제안을 수락한 판에서만 이어지는 제안
+      !(e.requires && !ctx.counters?.[`temptAccepted:${e.requires}`]),
   );
   const tempt = ok.filter((e) => e.kind === 'temptation');
   const plain = ok.filter((e) => e.kind === 'normal');

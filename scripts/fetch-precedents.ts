@@ -6,7 +6,7 @@
 import 'dotenv/config';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { classifyOrder, extractOrder } from './lib';
+import { classifyOrder, extractOrder, loadExcluded } from './lib';
 
 const OC = process.env.LAW_OC;
 if (!OC) throw new Error('.env에 LAW_OC가 없습니다');
@@ -130,9 +130,12 @@ async function main() {
   const caseNumbers = new Set(
     readdirSync(RAW_DIR).map((f) => (JSON.parse(readFileSync(path.join(RAW_DIR, f), 'utf8')) as RawPrecedent).사건번호),
   );
+  // 게임에서 영구 제외한 판례는 다시 수집하지 않음 (data/excluded.json)
+  const excluded = loadExcluded();
+  for (const n of excluded.caseNumbers) caseNumbers.add(n);
 
   const save = async (id: string, keyword?: string): Promise<boolean> => {
-    if (has(id)) return false;
+    if (has(id) || excluded.ids.has(id)) return false;
     await sleep(DELAY_MS);
     const p = await detail(id);
     if (!p) { console.log(`  - ${id}: 본문 응답 없음`); return false; }

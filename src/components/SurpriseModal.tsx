@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { SurpriseOutcome } from '../game/progression';
 import { STAT_NAMES, type StatId } from '../game/stats';
 import {
+  EXITS,
   SURPRISE_COST,
   SURPRISE_GAIN,
   TEMPT_COST,
@@ -23,6 +24,8 @@ const fx = (id: StatId, v: number) => `${STAT_NAMES[id]} ${v > 0 ? '+' : '−'}$
 export default function SurpriseModal({ event, when, onAnswer, onClose }: Props) {
   const [result, setResult] = useState<SurpriseOutcome | null>(null);
   const tempt = event.kind === 'temptation';
+  /** 응하면 법복을 벗고 떠날 수 있는 제안 */
+  const exitRule = EXITS[event.id];
 
   const acceptFx = tempt
     ? [fx(event.main, TEMPT_GAIN), fx('reputation', -TEMPT_COST)]
@@ -52,6 +55,12 @@ export default function SurpriseModal({ event, when, onAnswer, onClose }: Props)
           <>
             <p className="surprise-result">
               {result.accepted ? event.acceptText : event.declineText}
+              {result.exit && (
+                <>
+                  <br />
+                  <strong>{result.exit}</strong>
+                </>
+              )}
               {result.exposed && event.exposedText && (
                 <>
                   <br />
@@ -71,6 +80,11 @@ export default function SurpriseModal({ event, when, onAnswer, onClose }: Props)
               <dd>
                 {acceptFx.join(', ')}
                 {tempt && <span className="surprise-risk">알려지면 평판이 더 떨어질 수 있습니다.</span>}
+                {exitRule && (
+                  <span className="surprise-risk">
+                    {exitRule.chance >= 1 ? '법복을 벗고 떠나게 됩니다.' : '법복을 벗고 떠나게 될 수도 있습니다.'} (게임 종료)
+                  </span>
+                )}
               </dd>
               <dt>거절하면</dt>
               <dd>{declineFx.length ? declineFx.join(', ') : '변화 없음'}</dd>

@@ -8,7 +8,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import path from 'node:path';
 import { CaseSchema, type Case } from '../src/types/case';
 import type { RawPrecedent } from './fetch-precedents';
-import { classifyOrder, clean, extractOrder, geminiModel, stripNameModifiers, toPlayerQuestion } from './lib';
+import { classifyOrder, clean, extractOrder, geminiModel, loadExcluded, stripNameModifiers, toPlayerQuestion } from './lib';
 import { pickTargetIndex, regenerate } from './rebalance-choices';
 import { assignPersona } from './assign-persona';
 import { assignAvatars } from './assign-party-avatars';
@@ -187,7 +187,9 @@ async function convert(p: RawPrecedent): Promise<Case | { skipped: string }> {
 
 async function main() {
   mkdirSync(DRAFT_DIR, { recursive: true });
-  let files = readdirSync(RAW_DIR).filter((f) => f.endsWith('.json'));
+  // 게임에서 영구 제외한 판례는 --force여도 변환하지 않음 (data/excluded.json)
+  const excluded = loadExcluded().ids;
+  let files = readdirSync(RAW_DIR).filter((f) => f.endsWith('.json') && !excluded.has(f.replace('.json', '')));
   if (ONLY) files = files.filter((f) => f === `${ONLY}.json`);
   let done = 0, skipped = 0, failed = 0;
   for (const f of files) {

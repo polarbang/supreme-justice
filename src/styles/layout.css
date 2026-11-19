@@ -339,6 +339,7 @@
   .idcard { order: 1; }
   .status-card { order: 2; }
   .achievements { order: 3; }
+  .career-history { order: 3; }
   .case-log { order: 4; }
   .career-map { order: 5; }
   .guide { order: 6; }
@@ -658,6 +659,83 @@
   display: block;
   margin: 12px auto 0;
   font-size: 0.85rem;
+}
+
+/* ───────── 지난 경력 ───────── */
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.history-item + .history-item {
+  border-top: 1px solid var(--line-faint);
+}
+.history-head {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 9px 2px;
+  border: none;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.history-head:hover .history-who {
+  text-decoration: underline;
+}
+.history-outcome {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-soft);
+}
+.history-outcome.is-chief {
+  color: var(--accent-text);
+}
+.history-who {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+.history-date {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+.history-detail {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--well);
+}
+.history-detail div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.history-detail dt,
+.history-detail dd {
+  white-space: nowrap;
+}
+.history-detail dt {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+.history-detail dd {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-text);
+  font-variant-numeric: tabular-nums;
 }
 
 /* 신분증: 판사 이름 (눌러서 바꾸기) */

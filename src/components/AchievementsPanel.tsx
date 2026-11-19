@@ -45,11 +45,7 @@ export default function AchievementsPanel({ progress }: { progress: Progress }) 
         {visible.map((a) => {
           const on = !!got[a.id];
           return (
-            <li
-              key={a.id}
-              className={`badge-cell${on ? ' is-on' : ''}`}
-              title={on ? `${a.name} — ${a.condition} (법관 ${got[a.id].year}년차)` : `${a.name} — ${a.condition}`}
-            >
+            <li key={a.id} className={`badge-cell${on ? ' is-on' : ''}`}>
               <AchievementBadge a={a} size={48} />
               <span className="badge-name">{a.name}</span>
             </li>

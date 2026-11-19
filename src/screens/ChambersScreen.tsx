@@ -30,14 +30,18 @@ import JudgeCard from '../components/JudgeCard';
 import CareerMap from '../components/CareerMap';
 import CaseLog from '../components/CaseLog';
 import { playGavel } from '../game/sound';
-import type { SurpriseEvent } from '../game/surpriseEvents';
+import { exitEnding, type SurpriseEvent } from '../game/surpriseEvents';
 import SurpriseModal from '../components/SurpriseModal';
 import AchievementsPanel from '../components/AchievementsPanel';
 import AchievementPopup from '../components/AchievementPopup';
+import HistoryPanel from '../components/HistoryPanel';
+import type { CareerRecord } from '../game/history';
 import type { Achievement } from '../game/achievements';
 
 interface Props {
   progress: Progress;
+  /** 지난 경력 (끝난 판, 최신순) */
+  history: CareerRecord[];
   recordAnswer: (c: Case, choiceId: string) => Omit<VerdictOutcome, 'next'>;
   rollInsight: () => boolean;
   chooseActivity: (activityId: string) => void;
@@ -72,7 +76,7 @@ function savePending(c: Case | null) {
   }
 }
 
-export default function ChambersScreen({ progress, recordAnswer, rollInsight, chooseActivity, answerSurprise, setGender, setName, unlocked, onUnlockSeen, onReset }: Props) {
+export default function ChambersScreen({ progress, history, recordAnswer, rollInsight, chooseActivity, answerSurprise, setGender, setName, unlocked, onUnlockSeen, onReset }: Props) {
   const [active, setActive] = useState<Case | null>(null);
   const [pending, setPending] = useState<Case | null>(loadPending);
   const [submittedId, setSubmittedId] = useState<string | null>(null);
@@ -210,6 +214,7 @@ export default function ChambersScreen({ progress, recordAnswer, rollInsight, ch
             </dl>
           </section>
           <AchievementsPanel progress={progress} />
+          <HistoryPanel history={history} />
           {progress.total > 0 && !finished && (
             <button
               className="btn-link reset-link"
@@ -253,7 +258,15 @@ export default function ChambersScreen({ progress, recordAnswer, rollInsight, ch
             </>
           ) : finished ? (
             <section className="ending">
-              {isFinished(progress.rankIndex) ? (
+              {progress.exit ? (
+                <>
+                  <h2>{exitEnding(progress.exit)?.title}</h2>
+                  <p>
+                    {progress.name && `${progress.name} 판사는 `}법관 생활 {progress.yearsServed}년, {rank.name} 자리를 끝으로 법복을 벗고{' '}
+                    {exitEnding(progress.exit)?.phrase}. 판결 {progress.total}건, 적중률 {rate}%.
+                  </p>
+                </>
+              ) : isFinished(progress.rankIndex) ? (
                 <>
                   <h2>🏛️ 대법원장 취임</h2>
                   <p>

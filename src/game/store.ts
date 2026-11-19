@@ -24,7 +24,8 @@ import { euro } from './korean';
 import { pickPost } from './posts';
 import { newlyUnlocked, type Achievement } from './achievements';
 import { scheduleCycle } from './surpriseEvents';
-import { CASES_PER_CYCLE, isActivityTime, startActivityTime } from './progression';
+import { CASES_PER_CYCLE, isActivityTime, isOver, startActivityTime } from './progression';
+import { loadHistory, pushHistory, type CareerRecord } from './history';
 import { RANK_NAMES } from './rankNames';
 
 /** 인생 기록 첫 줄: 첫 근무처 배정 */
@@ -163,6 +164,9 @@ export function useProgress() {
     }
   }, [progress]);
 
+  /** 지난 경력 (최근 몇 판, 최신순) */
+  const [history, setHistory] = useState<CareerRecord[]>(loadHistory);
+
   /** 해금되어 팝업으로 보여 줄 업적 (차례대로) */
   const [unlockQueue, setUnlockQueue] = useState<Achievement[]>([]);
 
@@ -178,6 +182,8 @@ export function useProgress() {
       next = { ...next, achievements };
       setUnlockQueue((q) => [...q, ...unlocked]);
     }
+    // 이번 판이 막 끝났으면 지난 경력에 남김
+    if (isOver(next) && !isOver(ref.current)) setHistory(pushHistory(next));
     ref.current = next;
     setProgress(next);
   };
@@ -268,6 +274,7 @@ export function useProgress() {
       },
     ];
     if (out.exposed && out.event.exposedText) entries.push({ ...at, kind: 'scandal', text: out.event.exposedText });
+    if (out.exit) entries.push({ ...at, kind: 'retire', text: out.exit });
     commit(appendLog(out.next, entries));
     return out;
   }, []);
@@ -283,5 +290,5 @@ export function useProgress() {
     [],
   );
 
-  return { progress, recordAnswer, rollInsight, chooseActivity, answerSurprise, setGender, setName, reset, unlockQueue, shiftUnlock };
+  return { progress, history, recordAnswer, rollInsight, chooseActivity, answerSurprise, setGender, setName, reset, unlockQueue, shiftUnlock };
 }

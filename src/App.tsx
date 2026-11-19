@@ -2,11 +2,12 @@ import { useProgress } from './game/store';
 import ChambersScreen from './screens/ChambersScreen';
 
 export default function App() {
-  const { progress, recordAnswer, rollInsight, chooseActivity, answerSurprise, setGender, setName, reset, unlockQueue, shiftUnlock } =
+  const { progress, history, recordAnswer, rollInsight, chooseActivity, answerSurprise, setGender, setName, reset, unlockQueue, shiftUnlock } =
     useProgress();
   return (
     <ChambersScreen
       progress={progress}
+      history={history}
       recordAnswer={recordAnswer}
       rollInsight={rollInsight}
       chooseActivity={chooseActivity}

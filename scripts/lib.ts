@@ -1,4 +1,5 @@
 /** 데이터 스크립트 공통 유틸 */
+import { readFileSync } from 'node:fs';
 
 export const clean = (s = '') =>
   s
@@ -137,4 +138,10 @@ export function geminiModel(fallback = 'gemini-3.8-flash'): string {
   const raw = (process.env.GEMINI_MODEL ?? '').trim();
   if (!raw) return fallback;
   return raw.toLowerCase().replace(/^models\//, '').replace(/\s+/g, '-');
+}
+
+/** 게임에서 영구 제외한 판례 (data/excluded.json): 수집·변환·빌드 모두 건너뛴다 */
+export function loadExcluded(): { ids: Set<string>; caseNumbers: Set<string> } {
+  const list = JSON.parse(readFileSync('data/excluded.json', 'utf8')) as { id: string; caseNumber: string }[];
+  return { ids: new Set(list.map((x) => x.id)), caseNumbers: new Set(list.map((x) => x.caseNumber)) };
 }

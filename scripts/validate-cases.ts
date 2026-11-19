@@ -5,7 +5,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { CaseSchema, type Case } from '../src/types/case';
-import { classifyOrder, clean, extractOrder, hasNameModifier, parseAmounts, parseDurations } from './lib';
+import { classifyOrder, clean, extractOrder, hasNameModifier, loadExcluded, parseAmounts, parseDurations } from './lib';
 
 const DRAFT_DIR = 'data/drafts';
 const RAW_DIR = 'data/raw';
@@ -146,8 +146,10 @@ export function validateFile(file: string): Report {
 }
 
 export function validateAll(): Report[] {
+  // 게임에서 영구 제외한 판례는 draft가 남아 있어도 빌드에 넣지 않음 (data/excluded.json)
+  const excluded = loadExcluded().ids;
   return readdirSync(DRAFT_DIR)
-    .filter((f) => f.endsWith('.json') && !f.endsWith('.skip.json'))
+    .filter((f) => f.endsWith('.json') && !f.endsWith('.skip.json') && !excluded.has(f.replace('.json', '')))
     .map((f) => validateFile(path.join(DRAFT_DIR, f)));
 }
 
