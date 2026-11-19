@@ -25,6 +25,7 @@ import RankChangeModal from '../components/RankChangeModal';
 import GameGuide from '../components/GameGuide';
 import MuteButton from '../components/MuteButton';
 import ThemeButton from '../components/ThemeButton';
+import ShareButton, { ShareResultButton } from '../components/ShareButton';
 import CourtBanner from '../components/CourtBanner';
 import JudgeCard from '../components/JudgeCard';
 import CareerMap from '../components/CareerMap';
@@ -193,6 +194,7 @@ export default function ChambersScreen({ progress, history, recordAnswer, rollIn
           <span key={active ? 'court' : 'office'} className="header-label">
             {active ? '재판장' : '집무실'}
           </span>
+          <ShareButton />
           <ThemeButton />
           <MuteButton />
         </div>
@@ -283,6 +285,7 @@ export default function ChambersScreen({ progress, history, recordAnswer, rollIn
                   </p>
                 </>
               )}
+              <ShareResultButton text={endingShareText(progress, rate)} />
               <button
                 className="btn btn-primary btn-large"
                 onClick={() => {
@@ -337,6 +340,17 @@ export default function ChambersScreen({ progress, history, recordAnswer, rollIn
       )}
     </main>
   );
+}
+
+/** 엔딩 공유 문장: 어떻게 끝났는지 + 판결 수·적중률 */
+function endingShareText(p: Progress, rate: number) {
+  const rank = RANKS[p.rankIndex].name;
+  const how = p.exit
+    ? `법관 ${p.yearsServed}년, ${rank} 자리를 끝으로 법복을 벗고 ${exitEnding(p.exit)?.phrase}.`
+    : isFinished(p.rankIndex)
+      ? `법관 ${p.yearsServed}년 만에 ${currentAge(p)}세에 대법원장이 되었습니다!`
+      : `법관 ${p.yearsServed}년, ${rank} 자리에서 정년 퇴임했습니다.`;
+  return `[대법관 키우기] ${how} 판결 ${p.total}건, 적중률 ${rate}%.`;
 }
 
 function Stat({ value, label }: { value: string | number; label: string }) {

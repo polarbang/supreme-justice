@@ -4,7 +4,100 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>대법관 키우기</title>
+    <title>대법관 키우기 - 실제 판결문으로 만든 법정 시뮬레이션 게임</title>
+    <meta
+      name="description"
+      content="대법관 키우기는 실제 법원 판결문으로 만든 형사·민사 사건을 읽고 판결하며 배석판사에서 대법원장까지 오르는 무료 웹 법정 시뮬레이션 게임입니다. 가입 없이 브라우저에서 바로 할 수 있습니다."
+    />
+    <meta name="theme-color" content="#5c1f3a" />
+    <!-- 대표 주소: 배포마다 생기는 미리보기 주소 대신 이 주소로 색인 -->
+    <link rel="canonical" href="https://supreme-justice.vercel.app/" />
+
+    <!-- 링크 공유 미리보기 (카카오톡·SNS) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="대법관 키우기" />
+    <meta property="og:title" content="대법관 키우기 - 실제 판결문으로 만든 법정 게임" />
+    <meta property="og:description" content="사건을 읽고 판결하며 배석판사에서 대법원장까지. 가입 없이 바로 하는 무료 웹게임." />
+    <meta property="og:url" content="https://supreme-justice.vercel.app/" />
+    <meta property="og:image" content="https://supreme-justice.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="대법관 법복을 입은 판사 캐릭터와 '대법관 키우기' 제목" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="대법관 키우기 - 실제 판결문으로 만든 법정 게임" />
+    <meta name="twitter:description" content="사건을 읽고 판결하며 배석판사에서 대법원장까지. 가입 없이 바로 하는 무료 웹게임." />
+    <meta name="twitter:image" content="https://supreme-justice.vercel.app/og-image.jpg" />
+
+    <!-- 구조화 데이터: 검색엔진에 "무료 웹 게임 '대법관 키우기'"임을 알림 (본문 소개 글과 내용을 맞출 것) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://supreme-justice.vercel.app/#website",
+            "url": "https://supreme-justice.vercel.app/",
+            "name": "대법관 키우기",
+            "inLanguage": "ko-KR"
+          },
+          {
+            "@type": "VideoGame",
+            "@id": "https://supreme-justice.vercel.app/#game",
+            "name": "대법관 키우기",
+            "url": "https://supreme-justice.vercel.app/",
+            "image": "https://supreme-justice.vercel.app/og-image.jpg",
+            "description": "실제 법원 판결문으로 만든 형사·민사 사건을 읽고 판결하며 배석판사에서 대법원장까지 오르는 무료 웹 법정 시뮬레이션 게임.",
+            "genre": ["시뮬레이션", "법정 게임", "육성 게임"],
+            "gamePlatform": "웹 브라우저",
+            "applicationCategory": "Game",
+            "operatingSystem": "Any",
+            "inLanguage": "ko-KR",
+            "isAccessibleForFree": true,
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://supreme-justice.vercel.app/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "대법관 키우기는 어떤 게임인가요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "실제 법원 판결문으로 만든 사건을 읽고 판결을 내리며, 배석판사에서 시작해 대법원장까지 오르는 무료 웹 법정 시뮬레이션 게임입니다."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "어떻게 플레이하나요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "사건개요·증거·쟁점이 담긴 사건 기록을 읽고, 형사 사건은 형량을, 민사 사건은 청구를 얼마나 인정할지 고릅니다. 실제 법원 판결과 같으면 적중으로, 적중이 쌓이면 진급하고 오판이 쌓이면 강등될 수 있습니다."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "사건은 실제 판례인가요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "네. 국가법령정보센터에 공개된 하급심 판결문을 바탕으로 만들었고, 판결을 내린 뒤에는 실제 판결의 주문과 해설, 관련 조문, 판결문 원문 링크를 볼 수 있습니다."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "무료인가요? 회원가입이 필요한가요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "무료이고 회원가입 없이 브라우저에서 바로 할 수 있습니다. 진행 상황과 업적은 지금 쓰는 브라우저에 저장됩니다."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
     <!-- 첫 화면 깜빡임 방지: src/game/theme.ts 와 같은 규칙으로 테마를 미리 적용 -->
     <script>
       try {
@@ -15,7 +108,38 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- 게임이 뜨기 전(그리고 자바스크립트 없이 읽는 검색엔진)에 보이는 소개 글. 게임이 시작되면 React가 이 내용을 바꿔 그린다 -->
+    <div id="root">
+      <main style="max-width: 720px; margin: 0 auto; padding: 32px 20px; line-height: 1.7; font-family: 'Noto Sans KR', system-ui, sans-serif">
+        <h1>대법관 키우기</h1>
+        <p>
+          대법관 키우기는 실제 법원 판결문으로 만든 형사·민사 사건을 읽고 판결하며, 대법원장까지 오르는 법정
+          시뮬레이션 게임입니다. 회원가입 없이 브라우저에서 바로 할 수 있습니다.
+        </p>
+
+        <h2>플레이 방법</h2>
+        <ul>
+          <li>사건 기록철의 사건개요·증거·쟁점을 읽고 판결을 고릅니다. 형사 사건은 형량을, 민사 사건은 청구를 얼마나 인정할지 정합니다.</li>
+          <li>실제 법원 판결과 같으면 적중입니다. 적중이 쌓이면 진급하고, 오판이 쌓이면 강등될 수 있습니다.</li>
+          <li>활동을 통해 능력치를 키웁니다. 능력치는 다시 고르기, 강등 면제, 조기 진급 같은 효과로 이어집니다.</li>
+          <li>사건 사이사이 기습 일정과 은밀한 유혹 제안이 찾아옵니다. 응할지 거절할지에 따라 경력이 달라집니다.</li>
+        </ul>
+
+        <h2>직급</h2>
+        <p>배석판사 → 단독판사 → 부장판사 → 수석부장판사 → 지방법원장 → 고등법원장 → 대법관 → 대법원장</p>
+
+        <h2>자주 묻는 질문</h2>
+        <h3>사건은 실제 판례인가요?</h3>
+        <p>
+          네. 국가법령정보센터에 공개된 판결문을 바탕으로 만들었고, 판결을 내린 뒤에는 실제 판결의 주문과 해설, 관련 조문, 판결문 원문
+          링크를 볼 수 있습니다.
+        </p>
+        <h3>무료인가요? 회원가입이 필요한가요?</h3>
+        <p>무료이고 회원가입 없이 할 수 있습니다. 진행 상황과 업적은 지금 쓰는 브라우저에 저장됩니다.</p>
+
+        <noscript><p><strong>게임을 하려면 브라우저에서 자바스크립트를 켜 주세요.</strong></p></noscript>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -472,3 +472,61 @@
   background: var(--paper-accent);
   transform: rotate(45deg);
 }
+
+/* ───────── 공유 ───────── */
+.share-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.share-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--well);
+  color: var(--accent-text);
+}
+.share-btn:hover {
+  background: var(--well-strong);
+}
+/* 복사·실패 안내: 아이콘 아래 말풍선 (비어 있으면 안 보임) */
+.share-notice:empty {
+  display: none;
+}
+.share-notice {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  padding: 4px 10px;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: var(--bg);
+  background: var(--text);
+  border-radius: var(--radius);
+}
+.share-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.share-notice.is-inline {
+  position: static;
+}
+/* 좁은 화면에서 버튼 묶음이 다음 줄로 내려가도 오른쪽에 */
+.header-right {
+  margin-left: auto;
+}
+/* 엔딩의 결과 공유: 테두리만 있는 버튼 (처음부터 다시보다 가볍게) */
+.share-result .btn {
+  background: transparent;
+  color: var(--title);
+  border: 2px solid var(--line-strong);
+}
+.share-result .btn:hover {
+  background: var(--well);
+}
