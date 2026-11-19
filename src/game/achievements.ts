@@ -4,7 +4,8 @@
  * 뱃지 그림: src/assets/badges/<id>.webp (없으면 자리표시 그림)
  */
 import type { Case } from '../types/case';
-import { count, POLITICAL_EVENTS, START_AGE, type Progress } from './progression';
+import { count, START_AGE, type Progress } from './progression';
+import { POLITICAL_EVENTS } from './surpriseEvents';
 
 export type Tone = 'good' | 'neutral' | 'bad';
 
@@ -45,237 +46,253 @@ export const ACHIEVEMENTS: Achievement[] = [
   // ───────── 판결 ─────────
   {
     id: 'first-hit', name: '첫 단추', group: '판결', tone: 'good', condition: '첫 판결 적중',
-    motif: 'a single shirt button being fastened on a black judge robe',
+    motif: 'a small whole black judge robe shown on its own like a floating garment icon, with a single shiny gold button just fastened at the top collar, the other buttonholes below still empty',
     check: (x) => x.p.correct >= 1,
   },
   {
     id: 'streak-5', name: '명판관', group: '판결', tone: 'good', condition: '5연속 적중',
-    motif: 'a golden gavel with five small stars in an arc above it',
+    motif: 'a wooden judge gavel resting diagonally, with five small golden stars in a gentle rising arc above it, each star slightly bigger and brighter than the one before, like a combo streak lighting up',
     check: (x) => count(x.p, 'streakCorrect') >= 5,
   },
   {
     id: 'streak-10', name: '신들린 판결', group: '판결', tone: 'good', condition: '10연속 적중',
-    motif: 'a glowing golden gavel surrounded by radiant light rays and sparkles',
+    motif: 'a chibi judge in a black robe with eyes calmly closed in deep focus, confidently striking a golden gavel down onto a sound block with one hand, bold motion lines behind the gavel',
     check: (x) => count(x.p, 'streakCorrect') >= 10,
   },
   {
     id: 'criminal-20', name: '형사 전문가', group: '판결', tone: 'good', condition: '형사 사건 20건 적중',
-    motif: 'a pair of handcuffs crossed with a gavel',
+    motif: 'a single pair of steel handcuffs lying half open, with a small golden key inserted in one cuff',
     check: (x) => verdicts(x).filter((v) => v.correct && v.c.category === '형사').length >= 20,
   },
   {
     id: 'civil-15', name: '민사의 달인', group: '판결', tone: 'good', condition: '민사 사건 15건 적중',
-    motif: 'a signed contract scroll with a red seal stamp and a fountain pen',
+    motif: 'a small folded paper IOU note with a red thumbprint mark, tucked half inside a plump white money envelope',
     check: (x) => verdicts(x).filter((v) => v.correct && v.c.category === '민사').length >= 15,
   },
   {
-    id: 'hard-10', name: '난제 해결사', group: '판결', tone: 'good', condition: '난이도 3 사건 10건 적중',
-    motif: 'a tangled knot of rope being cleanly untied, with a small key',
+    id: 'hard-10', name: '난제 해결사', group: '판결', tone: 'good', condition: '가장 어려운 사건 10건 적중',
+    motif: 'a small magnifying glass hovering over the final golden jigsaw puzzle piece clicking into place in an almost finished puzzle square',
     check: (x) => verdicts(x).filter((v) => v.correct && v.c.difficulty === 3).length >= 10,
   },
   {
-    id: 'acquittal-3', name: '무죄 추정', group: '판결', tone: 'good', condition: '정답이 "무죄"인 사건 3건 적중',
+    id: 'acquittal-3', name: '무죄 추정', group: '판결', tone: 'good', condition: '무죄 사건을 3번 무죄로 판결',
     motif: 'a white dove flying out of an open birdcage',
     check: (x) => verdicts(x).filter((v) => v.correct && answerText(v.c) === '무죄').length >= 3,
   },
   {
     id: 'miss-5', name: '엇나간 감', group: '판결', tone: 'bad', condition: '5연속 미적중',
-    motif: 'a compass with a spinning broken needle pointing the wrong way',
+    motif: 'a small round dartboard with three darts all stuck outside the rim, none near the center',
     check: (x) => count(x.p, 'streakWrong') >= 5,
   },
   {
-    id: 'jailed-innocent', name: '판사님 그건 좀…', group: '판결', tone: 'bad',
-    condition: '정답이 무죄인데 실형을 고른 것 3번',
-    motif: 'a sweating judge face emoji next to cracked jail bars',
+    id: 'jailed-innocent', name: '판사님 그건 좀', group: '판결', tone: 'bad',
+    condition: '무죄 사건에 3번 실형 선고',
+    motif: 'a small white dove sitting sadly behind iron jail bars, with a single droplet of a tear on its cheek',
     check: (x) => verdicts(x).filter((v) => !v.correct && answerText(v.c) === '무죄' && isPrison(choiceText(v.c, v.choiceId))).length >= 3,
   },
   {
-    id: 'too-harsh', name: '철퇴 판사', group: '판결', tone: 'bad', condition: '실제보다 무거운 쪽을 고른 오답 10번',
-    motif: 'a heavy iron mace smashing down, with impact lines',
+    id: 'too-harsh', name: '철퇴 판사', group: '판결', tone: 'bad', condition: '실제 판결보다 무겁게 10번 선고',
+    motif: 'a wooden gavel with an oversized heavy iron head, just slammed down onto a sound block that has cracked in half, with bold impact lines',
     check: (x) => verdicts(x).filter((v) => !v.correct && heavier(v.c, v.choiceId)).length >= 10,
   },
   {
-    id: 'too-soft', name: '솜방망이', group: '판결', tone: 'bad', condition: '실제보다 가벼운 쪽을 고른 오답 10번',
-    motif: 'a fluffy cotton-candy club, soft and pink',
+    id: 'too-soft', name: '솜방망이', group: '판결', tone: 'bad', condition: '실제 판결보다 가볍게 10번 선고',
+    motif: 'a wooden gavel whose head is a puffy white cotton ball, softly squishing as it touches a sound block',
     check: (x) => verdicts(x).filter((v) => !v.correct && !heavier(v.c, v.choiceId)).length >= 10,
   },
   {
-    id: 'dismiss-5', name: '기각 전문', group: '판결', tone: 'bad', condition: '민사에서 "청구 기각"을 골라 틀린 것 5번',
-    motif: 'a big red rejection stamp hitting a document',
+    id: 'dismiss-5', name: '기각 전문', group: '판결', tone: 'bad', condition: '민사에서 5번 잘못 청구 기각',
+    motif: 'a small metal wastebasket overflowing with crumpled paper documents, one crumpled sheet fallen on the floor beside it',
     check: (x) => verdicts(x).filter((v) => !v.correct && v.c.category === '민사' && v.choiceId === 'a').length >= 5,
   },
 
   // ───────── 경력 ─────────
   {
-    id: 'first-promotion', name: '첫 발령', group: '경력', tone: 'good', condition: '첫 진급',
-    motif: 'an official appointment letter with a ribbon and a gold seal',
+    id: 'first-promotion', name: '새 명패', group: '경력', tone: 'good', condition: '첫 진급',
+    motif: 'a wooden desk name plate with a brand new shiny gold trim, a small red ribbon bow tied on one corner',
     check: (x) => x.p.highestRank >= 1,
   },
   {
     id: 'smooth-road', name: '탄탄대로', group: '경력', tone: 'good', condition: '강등 없이 대법관 도달',
-    motif: 'a straight golden road leading up to a courthouse on a hill',
+    motif: 'a long straight red carpet rolled out without a single wrinkle, leading to the front steps of a small courthouse',
     check: (x) => x.p.rankIndex >= 6 && count(x.p, 'demotions') === 0,
   },
   {
     id: 'fast-track', name: '초고속 승진', group: '경력', tone: 'good', condition: '45세 이전 대법관 도달',
-    motif: 'a rocket shooting upward past stair steps',
+    motif: 'a chibi judge character wearing a black judge robe like a superhero cape, flying straight vertically upward with one fist raised overhead, the robe fluttering behind, bold vertical speed lines below',
     check: (x) => x.p.rankIndex >= 6 && age(x.p) < 45,
   },
   {
     id: 'double-promotion', name: '파격 인사', group: '경력', tone: 'good', condition: '2계급 특진',
-    motif: 'a person leaping over two steps at once on a staircase, with motion lines',
+    motif: 'the collar of a black judge robe with two shiny gold rank pins being pinned on at once, side by side',
     check: (x) => count(x.p, 'doublePromotion') >= 1,
   },
   {
     id: 'chief-justice', name: '사법부의 수장', group: '경력', tone: 'good', condition: '대법원장 취임',
-    motif: 'a golden crown resting on top of a gavel and scales of justice',
+    motif: 'a small grand courthouse building with white columns, golden trim on its triangular roof, and wide front steps',
     check: (x) => x.p.rankIndex >= 7,
   },
   {
     id: 'youngest-chief', name: '최연소 대법원장', group: '경력', tone: 'good', condition: '45세 이하에 대법원장 취임',
-    motif: 'a small sprout growing out of a golden crown',
+    motif: 'a younger kid-faced chibi judge character with a black judge robe worn like a superhero cape, just landing on top of a small golden high-backed chair, cape still fluttering, a small golden crown on the head',
     check: (x) => x.p.rankIndex >= 7 && age(x.p) <= 45,
   },
   {
-    id: 'verdicts-100', name: '개근상', group: '경력', tone: 'neutral', condition: '판결 100건',
-    motif: 'a tall stack of case files with a 100 ribbon',
+    id: 'verdicts-100', name: '닳고 닳은 봉', group: '경력', tone: 'neutral', condition: '100건 판결',
+    motif: 'a well-worn wooden gavel with a smooth polished handle, resting on a sound block with a deep dent worn into its center from countless strikes',
     check: (x) => x.p.total >= 100,
   },
   {
-    id: 'first-demotion', name: '첫 좌천', group: '경력', tone: 'bad', condition: '첫 강등',
-    motif: 'a downward arrow on a cracked name plate',
+    id: 'first-demotion', name: '이게 아닌데', group: '경력', tone: 'bad', condition: '첫 강등',
+    motif: 'a wooden desk name plate fallen face-down on the floor with a crack running through it',
     check: (x) => count(x.p, 'demotions') >= 1,
   },
   {
-    id: 'comeback', name: '칠전팔기', group: '경력', tone: 'neutral', condition: '강등 3번 겪고 다시 가장 높았던 직급 회복',
-    motif: 'a roly-poly tumbler doll standing back up',
+    id: 'comeback', name: '칠전팔기', group: '경력', tone: 'neutral', condition: '3번 강등 겪고 최고 직급 되찾기',
+    motif: 'a round-bottomed roly-poly tumbler toy shaped like a chibi judge in a black robe, swaying back upright after being tipped over, with small curved rocking lines at its base',
     check: (x) => count(x.p, 'demotions') >= 3 && x.p.rankIndex >= x.p.highestRank,
   },
   {
-    id: 'revolving-door', name: '회전문 인사', group: '경력', tone: 'bad', condition: '같은 직급에서 강등·재진급 3번 반복',
-    motif: 'a spinning revolving door with circular arrows',
+    id: 'revolving-door', name: '쳇바퀴 인사', group: '경력', tone: 'bad', condition: '같은 직급에서 강등과 재진급 3번 반복',
+    motif: 'a chibi judge character in a black robe running hard inside a small hamster exercise wheel, sweating with a tired face, with circular motion lines around the wheel',
     check: (x) => [0, 1, 2, 3, 4, 5, 6, 7].some((r) => count(x.p, `demoteFrom${r}`) >= 3 && x.p.rankIndex >= r),
   },
   {
-    id: 'forever-single', name: '만년 단독', group: '경력', tone: 'bad', condition: '단독판사로 10년 이상 근무 (판결 40건)',
-    motif: 'a dusty desk name plate with cobwebs and a calendar with many torn pages',
-    check: (x) => count(x.p, 'verdictsAtRank1') >= 40,
+    id: 'forever-associate', name: '만년 배석', group: '경력', tone: 'bad', condition: '진급 없이 배석판사로 5년 근무',
+    motif: 'a plain wooden desk name plate covered in thick dust and draped with cobwebs, a tiny spider hanging from one corner',
+    check: (x) => count(x.p, 'verdictsAtRank0') >= 20 && x.p.highestRank === 0,
   },
   {
-    id: 'retired', name: '정년 퇴임', group: '경력', tone: 'bad', condition: '대법원장이 되지 못하고 60세 퇴임',
-    motif: 'a judge robe hanging on a coat hook with a farewell flower bouquet',
+    id: 'retired', name: '정년 퇴임', group: '경력', tone: 'bad', condition: '대법원장이 되지 못한 채 정년 퇴임',
+    motif: 'a black judge robe neatly draped over the back of an empty wooden chair, a small farewell flower bouquet resting on the seat',
     check: (x) => !!x.p.retired,
   },
 
   // ───────── 능력치 ─────────
   {
-    id: 'insight-10', name: '꿰뚫어 보는 눈', group: '능력치', tone: 'good', condition: '통찰력으로 다시 고르기 10번',
-    motif: 'a sharp glowing eye inside a magnifying glass',
+    id: 'insight-1', name: '다시 보니', group: '능력치', tone: 'good', condition: '통찰력으로 판결 1번 다시 고르기',
+    motif: 'a chibi judge character in a black robe pushing up round glasses with one finger while taking a second closer look at a case file held in the other hand',
+    check: (x) => count(x.p, 'insightRetry') >= 1,
+  },
+  {
+    id: 'insight-10', name: '꿰뚫어 보는 눈', group: '능력치', tone: 'good', condition: '통찰력으로 판결 10번 다시 고르기',
+    motif: 'a small hawk wearing a tiny black judge cap, perched on a stack of case files and staring down at them with sharp focused eyes',
     check: (x) => count(x.p, 'insightRetry') >= 10,
   },
   {
-    id: 'shield-3', name: '든든한 뒷배', group: '능력치', tone: 'neutral', condition: '인맥으로 강등 면제 3번',
-    motif: 'a sturdy shield held up by several hands from behind',
-    check: (x) => count(x.p, 'networkShield') >= 3,
+    id: 'shield-1', name: '인맥 찬스', group: '능력치', tone: 'neutral', condition: '인맥 덕분에 1번 강등 면하기',
+    motif: 'a smartphone showing an incoming call screen with a blank contact silhouette, a single small blank business card leaning against it',
+    check: (x) => count(x.p, 'networkShield') >= 1,
   },
   {
-    id: 'early-promotion', name: '좋은 평판', group: '능력치', tone: 'good', condition: '평판으로 조기 진급 1번',
-    motif: 'a thumbs-up inside a laurel wreath',
+    id: 'shield-5', name: '든든한 뒷배', group: '능력치', tone: 'neutral', condition: '인맥 덕분에 5번 강등 면하기',
+    motif: 'a thick bulging business card holder book stuffed with so many blank business cards that they are sticking out on every side',
+    check: (x) => count(x.p, 'networkShield') >= 5,
+  },
+  {
+    id: 'early-promotion', name: '좋은 평판', group: '능력치', tone: 'good', condition: '평판 덕분에 1번 조기 진급',
+    motif: 'a small round bird wearing a tiny black judge cap, holding a golden promotion envelope in its beak, perched on a branch with a sun just starting to peek over the horizon',
     check: (x) => count(x.p, 'earlyPromotion') >= 1,
   },
   {
+    id: 'early-promotion-3', name: '자자한 명성', group: '능력치', tone: 'good', condition: '평판 덕분에 3번 조기 진급',
+    motif: 'three small round birds wearing tiny black judge caps, perched in a row on a branch, each holding a golden promotion envelope in its beak, a sun just peeking over the horizon',
+    check: (x) => count(x.p, 'earlyPromotion') >= 3,
+  },
+  {
     id: 'health-100', name: '철인', group: '능력치', tone: 'good', condition: '건강 100 달성',
-    motif: 'a flexed muscular arm with a heart',
+    motif: 'a chibi judge character in a black robe with sleeves rolled up, lifting a dumbbell high with one hand and flexing proudly',
     check: (x) => x.p.stats.health >= 100,
   },
   {
     id: 'network-100', name: '마당발', group: '능력치', tone: 'neutral', condition: '인맥 100 달성',
-    motif: 'a big foot surrounded by many small connected people icons',
+    motif: 'a small photo frame showing a crowded group photo, a chibi judge in a black robe in the very center making a peace sign, many smiling people squeezed in around it',
     check: (x) => x.p.stats.network >= 100,
   },
   {
     id: 'reputation-100', name: '국민 판사', group: '능력치', tone: 'good', condition: '평판 100 달성',
-    motif: 'a crowd of tiny people cheering under a heart',
+    motif: 'a folded newspaper front page with a large smiling portrait drawing of a chibi judge, the headline area shown as thick blank lines',
     check: (x) => x.p.stats.reputation >= 100,
   },
   {
-    id: 'overwork', name: '과로 판사', group: '능력치', tone: 'bad', condition: '건강 35 이하로 떨어짐',
-    motif: 'a tired face with dark eye bags next to a steaming coffee cup and a pile of papers',
+    id: 'overwork', name: '카페인 중독', group: '능력치', tone: 'bad', condition: '건강 35 이하로 떨어지기',
+    motif: 'a chibi judge character in a black robe with heavy dark eye bags, half buried behind tall piles of case files, clutching a coffee mug with a tired blank stare',
     check: (x) => x.p.stats.health <= 35,
   },
   {
-    id: 'burnout', name: '번아웃', group: '능력치', tone: 'bad', condition: '건강 40 미만 상태에서 판결 누적 10건',
-    motif: 'a burnt-out match with a thin wisp of smoke',
+    id: 'burnout', name: '번아웃', group: '능력치', tone: 'bad', condition: '건강 40 미만인 채로 10건 판결',
+    motif: 'a chibi judge character in a black robe melted and slumped limply over a chair like a puddle, with a dazed face',
     check: (x) => count(x.p, 'lowHealthVerdicts') >= 10,
   },
   {
     id: 'bad-reputation', name: '바닥난 평판', group: '능력치', tone: 'bad', condition: '평판 20 미만',
-    motif: 'a newspaper with a big red headline and a downward graph',
+    motif: 'a chibi judge character in a black robe shielding its face with one sleeve, a squashed tomato splattered on the robe and another tomato flying toward it',
     check: (x) => x.p.stats.reputation < 20,
   },
 
   // ───────── 기습 일정·제안 ─────────
   {
     id: 'clean-10', name: '청렴 판사', group: '기습 일정·제안', tone: 'good', condition: '유혹 제안 10번 거절',
-    motif: 'a hand pushing away an envelope of money, with a white lily',
+    motif: 'a chibi judge character in a black robe firmly pushing back a cardboard apple box with both hands, shaking its head, a thick envelope peeking out from between the apples',
     check: (x) => count(x.p, 'temptDeclined') >= 10,
   },
   {
-    id: 'no-politics', name: '정치와 거리 두기', group: '기습 일정·제안', tone: 'good',
-    condition: '정당 영입·입각 타진·정치권 회동 제안을 받은 적이 있고 모두 거절',
-    motif: 'a judge gavel standing apart from a parliament building, with a line between them',
-    check: (x) => count(x.p, 'politicalOffers') >= 1 && count(x.p, 'politicalAccepted') === 0,
+    id: 'no-politics', name: '여의도 안가요', group: '기습 일정·제안', tone: 'good',
+    condition: '한 판에서 정치권 제안 3가지 모두 거절',
+    motif: 'a small open gift box holding a shiny round gold lapel pin, with a red return arrow sticker on the lid, being pushed back',
+    // 정치권 제안은 한 판에 한 번씩만 뜨므로, 셋 다 거절 기록이 있으면 모두 거절한 것
+    check: (x) => [...POLITICAL_EVENTS].every((id) => count(x.p, `politicalDeclined:${id}`) >= 1),
   },
   {
-    id: 'first-bribe', name: '첫 청탁', group: '기습 일정·제안', tone: 'bad', condition: '유혹 제안 첫 수락',
-    motif: 'a hand secretly taking an envelope under a table',
+    id: 'first-bribe', name: '사과 박스', group: '기습 일정·제안', tone: 'bad', condition: '유혹 제안 첫 수락',
+    motif: 'a cardboard apple box with its lid half open, shiny red apples on top and a thick envelope peeking out from between the apples',
     check: (x) => count(x.p, 'temptAccepted') >= 1,
   },
   {
-    id: 'exposed-3', name: '단골 기삿거리', group: '기습 일정·제안', tone: 'bad', condition: '들통 3번',
-    motif: 'camera flashes and a microphone pointed at a newspaper headline',
+    id: 'exposed-3', name: '단골 기삿거리', group: '기습 일정·제안', tone: 'bad', condition: '유혹 제안 수락이 3번 들통나기',
+    motif: 'a startled chibi judge character in a black robe caught in the middle, surrounded by several cameras with long telephoto lenses aimed at it from all sides, bold camera flash bursts going off',
     check: (x) => count(x.p, 'exposed') >= 3,
   },
   {
-    id: 'judicial-abuse', name: '사법 농단', group: '기습 일정·제안', tone: 'bad', condition: '유혹 제안 5번 수락하고 대법관 이상 도달',
-    motif: 'a cracked scale of justice tilted by a bag of gold coins',
+    id: 'judicial-abuse', name: '사법 농단', group: '기습 일정·제안', tone: 'bad', condition: '유혹 제안 5번 수락하고 대법관 되기',
+    motif: 'a wooden judge gavel hanging from puppet strings like a marionette, the strings leading up to a large hand at the top controlling them with its fingers',
     check: (x) => count(x.p, 'temptAccepted') >= 5 && x.p.rankIndex >= 6,
   },
   {
-    id: 'lucky', name: '운 좋은 사람', group: '기습 일정·제안', tone: 'bad', condition: '유혹 제안 5번 수락했는데 한 번도 안 들킴',
-    motif: 'a four-leaf clover hiding behind a sneaky grin mask',
+    id: 'lucky', name: '완전 범죄', group: '기습 일정·제안', tone: 'bad', condition: '유혹 제안 5번 수락하고 한 번도 안 들키기',
+    motif: 'several cameras all aimed the wrong way, while a chibi judge character in a black robe tiptoes sneakily behind them carrying an envelope',
     check: (x) => count(x.p, 'temptAccepted') >= 5 && count(x.p, 'exposed') === 0,
   },
   {
-    id: 'decliner', name: '거절의 달인', group: '기습 일정·제안', tone: 'neutral', condition: '일반 기습 일정 10번 거절',
-    motif: 'a polite hand raised in a stop gesture, with a calendar',
+    id: 'decliner', name: '거절의 달인', group: '기습 일정·제안', tone: 'neutral', condition: '기습 일정 10번 거절',
+    motif: 'a chibi judge character in a black robe smiling apologetically while waving both hands in front of it in a polite no-thank-you gesture',
     check: (x) => count(x.p, 'normalDeclined') >= 10,
   },
   {
-    id: 'yes-man', name: '예스맨', group: '기습 일정·제안', tone: 'neutral', condition: '일반 기습 일정 10번 연속 참여',
-    motif: 'a bobblehead nodding yes with a big speech bubble saying OK',
+    id: 'yes-man', name: '예스맨', group: '기습 일정·제안', tone: 'neutral', condition: '기습 일정 10번 연속 참여',
+    motif: 'a chibi judge character in a black robe eagerly stretching one hand as high as it can go, standing on tiptoes, with an excited face',
     check: (x) => count(x.p, 'normalAcceptStreak') >= 10,
   },
 
   // ───────── 활동 ─────────
   {
     id: 'bookworm', name: '공부벌레', group: '활동', tone: 'neutral', condition: '통찰력 활동 10번',
-    motif: 'a cute worm wearing glasses peeking out of a thick law book',
+    motif: 'a chibi judge character in a black robe sitting between tall stacks of law books, rubbing its eyes while reading by a small desk lamp',
     check: (x) => count(x.p, 'activity_insight') >= 10,
   },
   {
     id: 'social', name: '사교의 왕', group: '활동', tone: 'neutral', condition: '인맥 활동 10번',
-    motif: 'two clinking glasses with a small crown above them',
+    motif: 'a chibi judge character in a black robe wearing a golf visor, mid-swing with a golf club, a small golf ball flying off, surrounded by a few other chibi golfers in visors clapping and cheering',
     check: (x) => count(x.p, 'activity_network') >= 10,
   },
   {
-    id: 'volunteer', name: '봉사하는 판사', group: '활동', tone: 'good', condition: '평판 활동 10번',
-    motif: 'two hands holding a warm glowing heart',
+    id: 'volunteer', name: '시민의 판사', group: '활동', tone: 'good', condition: '평판 활동 10번',
+    motif: 'a chibi judge character in a black robe wearing cotton work gloves, cheerfully carrying a stack of black coal briquettes',
     check: (x) => count(x.p, 'activity_reputation') >= 10,
   },
   {
-    id: 'rest-10', name: '쉬어 가기', group: '활동', tone: 'neutral', condition: '건강 활동 10번',
-    motif: 'a hammock between two trees with a sleeping cat',
+    id: 'rest-10', name: '휴정 중', group: '활동', tone: 'neutral', condition: '건강 활동 10번',
+    motif: 'a chibi judge character asleep in a hammock strung between two small trees, its black robe draped over it like a blanket',
     check: (x) => count(x.p, 'activity_health') >= 10,
   },
 ];

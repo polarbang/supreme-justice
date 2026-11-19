@@ -17,12 +17,14 @@ export const TEMPT_COST = 6;
 export const TEMPT_EXPOSE_CHANCE = 0.25;
 /** 그날 뽑는 이벤트가 유혹 이벤트일 확률 */
 export const TEMPT_SHARE = 0.25;
-/** 같은 이벤트가 다시 나오기까지 최소 주 수 */
-export const SURPRISE_COOLDOWN_WEEKS = 4;
+/** 같은 이벤트가 다시 나오기까지 최소 바퀴 수 (한 바퀴 = 사건 3건, 4바퀴 = 사건 12건) */
+export const SURPRISE_COOLDOWN_CYCLES = 4;
 /** 한 바퀴(사건 3건)에 기습 이벤트가 뜰 확률 (뜨면 1번) */
 export const SURPRISE_CHANCE_PER_CYCLE = 0.6;
 /** 한 바퀴의 사건 수 (progression.ts CASES_PER_CYCLE과 같게) */
 const CYCLE_CASES = 3;
+/** 정치권 제안 (한 판에 한 번씩만 등장, 셋 다 거절하면 업적 "여의도 안가요") */
+export const POLITICAL_EVENTS = new Set(['party-recruit', 'power-meeting', 'cabinet']);
 
 export interface SurpriseEvent {
   id: string;
@@ -359,7 +361,8 @@ export function pickSurprise(
       inRank(e, ctx.rankIndex) &&
       // 건강 40 미만이면 참여 시 건강이 깎이는 이벤트는 빼기
       !(ctx.stats.health < HEALTH_REST_ONLY_BELOW && e.cost === 'health') &&
-      !(ctx.surpriseSeen[e.id] !== undefined && ctx.week - ctx.surpriseSeen[e.id] < SURPRISE_COOLDOWN_WEEKS),
+      !(ctx.surpriseSeen[e.id] !== undefined && ctx.week - ctx.surpriseSeen[e.id] < SURPRISE_COOLDOWN_CYCLES) &&
+      !(POLITICAL_EVENTS.has(e.id) && ctx.surpriseSeen[e.id] !== undefined),
   );
   const tempt = ok.filter((e) => e.kind === 'temptation');
   const plain = ok.filter((e) => e.kind === 'normal');

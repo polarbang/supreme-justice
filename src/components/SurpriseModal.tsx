@@ -19,7 +19,7 @@ interface Props {
 
 const fx = (id: StatId, v: number) => `${STAT_NAMES[id]} ${v > 0 ? '+' : '−'}${Math.abs(v)}`;
 
-/** 평일 기습 이벤트: 참여할지 거절할지 고르고, 결과 한 문장을 보여 준 뒤 닫는다 */
+/** 기습 이벤트: 참여할지 거절할지 고르고, 결과 한 문장을 보여 준 뒤 닫는다 */
 export default function SurpriseModal({ event, when, onAnswer, onClose }: Props) {
   const [result, setResult] = useState<SurpriseOutcome | null>(null);
   const tempt = event.kind === 'temptation';

@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>대법관 키우기</title>
+    <!-- 첫 화면 깜빡임 방지: src/game/theme.ts 와 같은 규칙으로 테마를 미리 적용 -->
+    <script>
+      try {
+        var t = localStorage.getItem('supreme-justice:theme');
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

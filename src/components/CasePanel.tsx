@@ -71,7 +71,7 @@ export default function CasePanel({ data, submittedId, blockedIds = [], notice, 
             <button className="btn btn-secondary" onClick={onClose}>
               집무실로 돌아가기
             </button>
-            <button className="btn btn-primary" disabled={!selected} onClick={() => selected && onSubmit(selected)}>
+            <button className="btn btn-primary btn-verdict" disabled={!selected} onClick={() => selected && onSubmit(selected)}>
               판결 선고
             </button>
           </div>

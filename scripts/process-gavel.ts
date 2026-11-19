@@ -40,3 +40,12 @@ await sharp(Buffer.concat(frames), { raw: { width: tw, height: th * pages, chann
   .webp({ quality: 90, alphaQuality: 100, loop: 0, delay: meta.delay ?? Array(pages).fill(350) })
   .toFile(OUT);
 console.log(`✓ ${SRC} → ${OUT} (${tw}×${th}, ${pages}프레임)`);
+
+// 판결 선고 버튼 커서: 첫 프레임(판사봉을 든 모습)을 32px PNG로 (커서는 애니메이션·webp 지원이 들쭉날쭉)
+const CURSOR = 'src/assets/gavel-cursor.png';
+const CURSOR_SIZE = 32;
+await sharp(frames[0], { raw: { width: tw, height: th, channels: 4 } })
+  .resize(CURSOR_SIZE, CURSOR_SIZE, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  .png()
+  .toFile(CURSOR);
+console.log(`✓ 커서 → ${CURSOR} (${CURSOR_SIZE}×${CURSOR_SIZE})`);

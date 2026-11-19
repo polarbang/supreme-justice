@@ -95,7 +95,7 @@ function load(): Progress {
     const s = localStorage.getItem(KEY);
     if (!s) return { ...freshProgress(), achievements: loadAchievements() };
     const saved = JSON.parse(s);
-    // 능력치·요일이 없던 예전 저장본은 기본값으로 채움
+    // 능력치·진행 차례(day)가 없던 예전 저장본은 기본값으로 채움
     const log: LogEntry[] = Array.isArray(saved.log) ? saved.log : [];
     const post: string = typeof saved.post === 'string' && saved.post ? saved.post : pickPost(saved.rankIndex ?? 0);
     return toCycle({

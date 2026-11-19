@@ -7,7 +7,8 @@ import { writeFileSync } from 'node:fs';
 import { RANK_NAMES } from '../src/game/rankNames';
 import { STAT_NAMES, type StatId } from '../src/game/stats';
 import {
-  SURPRISE_COOLDOWN_WEEKS,
+  POLITICAL_EVENTS,
+  SURPRISE_COOLDOWN_CYCLES,
   SURPRISE_COST,
   SURPRISE_EVENTS,
   SURPRISE_GAIN,
@@ -81,7 +82,7 @@ const md = `# 이벤트 표
 | 거절 | 변화 없음, 또는 능력치 하나 −${SURPRISE_COST} (윗사람 부탁·공식 요구 등) |
 | 유혹 이벤트 참여 | 주 능력치 +${TEMPT_GAIN}, 평판 −${TEMPT_COST}. ${pct(TEMPT_EXPOSE_CHANCE)} 확률로 바로 알려져 평판 −${TEMPT_COST} 추가 |
 | 유혹 이벤트 비중 | 그날 뽑히는 이벤트의 약 ${pct(TEMPT_SHARE)} |
-| 반복 방지 | 같은 이벤트는 ${SURPRISE_COOLDOWN_WEEKS}주 안에 다시 나오지 않음 |
+| 반복 방지 | 같은 이벤트는 사건 ${SURPRISE_COOLDOWN_CYCLES * 3}건(${SURPRISE_COOLDOWN_CYCLES}바퀴) 안에 다시 나오지 않음. 정치권 제안(${[...POLITICAL_EVENTS].map((id) => SURPRISE_EVENTS.find((e) => e.id === id)!.name).join(', ')})은 한 판에 한 번씩만 |
 | 건강 40 미만 | 참여 시 건강이 깎이는 이벤트는 나오지 않음 |
 
 ### 일반 이벤트 (${normal.length}개)

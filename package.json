@@ -14,6 +14,7 @@
     "data:rebalance": "tsx scripts/rebalance-choices.ts",
     "data:validate": "tsx scripts/validate-cases.ts",
     "data:build": "tsx scripts/build-cases.ts",
+    "data:release": "npm run data:validate && npm run data:build -- --all && npm run build",
     "data:persona": "tsx scripts/assign-persona.ts",
     "data:avatars": "tsx scripts/assign-party-avatars.ts",
     "data:laws": "tsx scripts/check-law-links.ts",

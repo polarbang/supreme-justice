@@ -12,7 +12,7 @@
 | 데이터 검증 | zod (`src/types/case.ts`) |
 | 사건 생성 | 국가법령정보센터 Open API로 판례 수집 → Gemini(`gemini-3.8-flash`)로 게임 문제 변환 |
 | 저장 | 브라우저 localStorage (서버 없음) |
-| 사건 수 | 140건 — 형사 89 · 민사 51, 난이도 1/2/3 = 35/63/42, **전부 미검수**(`reviewed:false`, `data:build -- --all`로 포함) |
+| 사건 수 | 191건 — 형사 117 · 민사 74, 난이도 1/2/3 = 36/106/49, **전부 미검수**(`reviewed:false`, `data:build -- --all`로 포함) |
 
 ```bash
 npm run dev      # 개발 서버
@@ -26,13 +26,13 @@ API 키는 `.env`(git 미추적)에만 둔다. 문서·코드에 값 기재 금�
 ## 2. 게임 흐름 트리 (플레이어 관점)
 
 ```
-게임 시작 (1주차 월요일, 배석판사, 능력치 모두 60)
+게임 시작 (첫 바퀴 첫 사건, 배석판사, 통찰력·인맥·평판 60 / 건강 70)
 │
 ├─ 집무실 (헤더: "집무실")
-│   ├─ [평일, 기습 일정이 있는 날] 기습 이벤트 창 → 참여한다 / 거절한다 → 결과 → 확인
-│   │     (한 주에 1~2번, 답하기 전엔 사건 배당 불가, 표: docs/EVENTS.md)
-│   ├─ [평일 월~금] 사건 배당받기  ─ 보류한 사건이 있으면 "보류한 사건 다시 보기"
-│   └─ [주말 토·일] 주말 활동 고르기 ─ ▶ 주말 흐름
+│   ├─ [사건 차례, 기습 일정이 뜬 차례] 기습 이벤트 창 → 참여한다 / 거절한다 → 결과 → 확인
+│   │     (한 바퀴(사건 3건)에 최대 1번, 답하기 전엔 사건 배당 불가, 표: docs/EVENTS.md)
+│   ├─ [사건 차례: 바퀴마다 3번] 사건 배당받기  ─ 보류한 사건이 있으면 "보류한 사건 다시 보기"
+│   └─ [활동 차례: 사건 3건 뒤] 활동 고르기 ─ ▶ 활동 흐름
 │
 ├─ 재판장 (헤더: "재판장")
 │   ├─ 사건 기록철 (탭 3개)
@@ -61,14 +61,14 @@ API 키는 `.env`(git 미추적)에만 둔다. 문서·코드에 값 기재 금�
 │           ├─ 능력치 발동 안내 (담백한 한 문장)
 │           ├─ 직급 변경 모달 (진급/강등 시)
 │           ├─ 판결문: 법원·선고일·사건번호 / 주문 / 해설 / 판결문 중에서 / 관련 조문 / 원문 링크
-│           ├─ 건강 −1, 다음 요일로
-│           └─ [집무실로 돌아가기] 하나뿐 (하루 1건: 반드시 집무실을 거쳐 다음 날로)
+│           ├─ 건강 −1, 다음 차례로 (3건째였으면 활동 차례)
+│           └─ [집무실로 돌아가기] 하나뿐 (한 차례 1건: 반드시 집무실을 거쳐 다음 차례로)
 │
-├─ 주말 흐름
-│   ├─ 토요일: 선택지 4개(통찰력·인맥·평판·건강 활동 각 1개) 중 1개 → 주 능력치 +8, 다른 능력치 −4
-│   ├─ 일요일: 토요일에 나온 활동 제외하고 새 4개 중 1개 (토요일 결과 한 줄 표시)
+├─ 활동 흐름 (사건 3건마다 1번)
+│   ├─ 선택지 4개(통찰력·인맥·평판·건강 활동 각 1개) 중 1개 → 주 능력치 +8, 다른 능력치 −4
+│   ├─ 직전 활동 차례에 나온 활동은 되도록 빼고 제시
 │   ├─ 건강 40 미만이면 건강 활동 4개만 제시
-│   └─ 일요일 선택 후 → 다음 주차 월요일
+│   └─ 선택 후 → 다음 바퀴 첫 사건 차례 (이번 바퀴 기습 이벤트 차례를 새로 정함)
 │
 ├─ 대법원장 도달 → 엔딩 ("대법원장 취임")
 └─ 60세가 되는 인사 시점에 대법원장이 아니면 → 엔딩 ("정년 퇴임")
@@ -112,6 +112,7 @@ API 키는 `.env`(git 미추적)에만 둔다. 문서·코드에 값 기재 금�
 - ✅ **관련 조문 링크** — 조문 주소 자동 생성, 폐지·개명 법령은 실제로 열어 보고 검색 링크로 대체 (`data:laws`)
 - ✅ 사건 10건 추가 (2026-11-16, 형사 6·민사 4 → 총 110건). 기존 100건 난이도는 유지
 - ✅ 사건 30건 추가 (2026-11-17, 형사 19·민사 11 → 총 140건). Flash-Lite 변환이 당사자 이름에 실명·"원고"를 넣는 등 규칙을 자주 어겨 손으로 고침 → 검증에 "당사자 이름은 알파벳" 오류 추가
+- ✅ 사건 1건 추가 (형사 205631 → 총 141건)
 - ⬜ 사건 더 추가 (시드 키워드 확장해 둠)
 - ⬜ 사건 검수 (`reviewed:true`)
 - ⏸ 간결화 이전의 긴 사건개요: 남아 있지 않음. 필요하면 `data/raw` 원문에서 재생성
@@ -160,10 +161,10 @@ API 키는 `.env`(git 미추적)에만 둔다. 문서·코드에 값 기재 금�
   | 인맥 | 강등 면제 (다음 오답에서 다시 판정) | 30% |
   | 평판 | 적중 수 미달이어도 진급 | 15% |
   | 평판 | 적중 수 채워 진급할 때 두 단계 진급 | 5% |
-  | 건강 | 50 미만: 모든 발동 확률 절반 / 40 미만: 주말에 건강 활동만 | — |
+  | 건강 | 50 미만: 모든 발동 확률 절반 / 40 미만: 활동 차례에 건강 활동만 | — |
 
-- ✅ 평일(월~금) 판결 1건씩, 판결마다 건강 −1 (주 −5)
-- ✅ 주말(토·일) 하루 1회 활동 선택, 4지선다(능력치별 1개)
+- ✅ 한 바퀴 = 사건 3건 + 활동 1번. 판결마다 건강 −1 (바퀴당 −3)
+- ✅ 사건 3건마다 활동 1번 선택, 4지선다(능력치별 1개)
 - ✅ 활동 효과 고정: 주 능력치 +8, 다른 능력치 하나 −4 (깎이는 능력치는 활동마다 다르고 설명에 이유가 드러남)
 - ✅ 활동 52개, 일부는 직급 조건
 
@@ -178,7 +179,7 @@ API 키는 `.env`(git 미추적)에만 둔다. 문서·코드에 값 기재 금�
 - ✅ **기습 이벤트** (2026-11-16): 사건 3건 동안 최대 1번(바퀴마다 60%), 사건 배당 전에 이벤트 하나에 참여/거절
   - 일반 32개: 참여 주 능력치 +6·다른 능력치 −3, 거절 변화 없음 또는 −3
   - 유혹 12개(청탁·접대·정당 영입·입각 타진 등): 참여 +8·평판 −6, 25% 확률로 들통 평판 −6 추가
-  - 직급별 등장, 4주 반복 방지, 건강 40 미만이면 건강이 깎이는 이벤트 제외
+  - 직급별 등장, 사건 12건(4바퀴) 반복 방지, 건강 40 미만이면 건강이 깎이는 이벤트 제외
   - 전체 표: [EVENTS.md](EVENTS.md) (`npm run docs:events`로 코드에서 생성)
 - ✅ 판결 후 [다음 사건] 제거 → 반드시 집무실로 돌아감
 - ✅ **진행 단위 변경** (2026-11-16): 월~금 판결·토일 활동(주 단위) → **사건 3건마다 활동 1번**. "주말"이라는 말은 쓰지 않고 "활동 선택". 예전 저장본은 열 때 바퀴 단위로 맞춤
@@ -187,12 +188,12 @@ API 키는 `.env`(git 미추적)에만 둔다. 문서·코드에 값 기재 금�
 - ⬜ 알려진 허점: 사건을 보류했다가 다시 열면 통찰력 판정을 한 번 더 받을 수 있음
 
 ### 에픽 F. 편의 · 화면
-- ✅ 대시보드 배치 (2026-11-16): 상단 바(직급·주차·대법원장까지 진행 바·음소거) + PC 3단(본문 폭 1440px, 왼쪽 360 / 가운데 / 오른쪽 380, 남는 폭은 좌우 여백), 1100px 미만은 한 줄(오늘의 재판 → 신분증 → 상태 → 기록), 좁은 화면에서 재판 중엔 오른쪽 기록 칸 숨김
+- ✅ 대시보드 배치 (2026-11-16): 상단 바(직급·연도·법관 연차·대법원장까지 진행 바·음소거) + PC 3단(본문 폭 1440px, 왼쪽 360 / 가운데 / 오른쪽 380, 남는 폭은 좌우 여백), 1100px 미만은 한 줄(오늘의 재판 → 신분증 → 상태 → 기록), 좁은 화면에서 재판 중엔 오른쪽 기록 칸 숨김
 - ✅ 판사 이름 (2026-11-17): 신분증 "이름" 줄을 눌러 정함(최대 8자), 저장·처음부터 다시 해도 유지, 엔딩 문장에 사용
 - ✅ 캐릭터 성별 (2026-11-16): 신분증 위쪽 띠의 [남|여]로 언제든 전환, 직급 그림(신분증·직급표·진급 창)이 바뀜. Progress.gender에 저장(기본 여), 처음부터 다시 해도 유지
-- ✅ 법관 신분증 카드: 직급 그림·직급·근무처(직급별 무작위)·근무 주차·진급/오판 현황 (Lv 표시·"강등 없음" 문구 없음)
+- ✅ 법관 신분증 카드: 직급 그림·직급·근무처(직급별 무작위)·경력(법관 연차·나이)·진급/오판 현황 (Lv 표시·"강등 없음" 문구 없음)
 - ✅ 경력 지도: 한 줄 10칸 네모 격자, 판결 1건 = 1칸 (적중 초록·미적중 빨강, 진급/강등 마름모, 나머지는 빈 네모, 최근 100건)
-- ✅ 인생 기록: 집무실의 오늘의 재판(주말 활동) 바로 아래, 날짜별 최근 순 타임라인 — 판결 적중/미적중 꼬리표 + 사건명만(내 판결·정답은 남기지 않음, 2026-11-17), 능력치 발동, 진급/강등, 기습 일정([일정] 꼬리표 + 참여·거절 문장), 유혹 제안 수락·거절과 들통, 주말 활동. 재판 중에는 숨김
+- ✅ 인생 기록: 집무실의 오늘의 재판(활동 선택) 바로 아래, 연차별 최근 순 타임라인 — 판결 적중/미적중 꼬리표 + 사건명만(내 판결·정답은 남기지 않음, 2026-11-17), 능력치 발동, 진급/강등, 기습 일정([일정] 꼬리표 + 참여·거절 문장), 유혹 제안 수락·거절과 들통, 활동. 재판 중에는 숨김
 - ✅ 기습 일정이 있어도 그날 판결은 그대로 진행(이벤트에 답한 뒤 사건 배당), 경력 지도에는 기습 일정 표시 안 함
 - ✅ 업적 45개 (2026-11-17): 해금 팝업(인생 기록에는 안 남김), 상태 카드 아래 업적판(한 줄 3개, 기본 12개 + 펼치기, 얻은 업적 먼저), 기록 초기화해도 이 브라우저에 유지·재해금 없음. 목록 [ACHIEVEMENTS.md](ACHIEVEMENTS.md), 뱃지 프롬프트 [BADGE_PROMPTS.md](BADGE_PROMPTS.md) (`npm run docs:badges`), 그림 변환 `npm run assets:badges` (img/badges/<id>.png → src/assets/badges/<id>.webp)
 - ✅ 활동 카드 (2026-11-17): 위쪽 색 띠 없음, 능력치 변화 표시는 각진 사각형, 오르는 쪽은 그 능력치 색(내리는 쪽은 빨강), 테두리와 설명글 시작 위치 맞춤, 활동명 크게
@@ -200,7 +201,9 @@ API 키는 `.env`(git 미추적)에만 둔다. 문서·코드에 값 기재 금�
 - ✅ 상태 카드: 능력치 막대 + 판결·적중·적중률
 - ✅ 능력치 막대 4개 (건강 낮으면 색 경고)
 - ✅ 게임 안내 (형사/민사 설명 줄은 삭제)
+- ✅ **대법정 도트 배경** (2026-11-19): 화면 맨 위 띠(`CourtBanner`, 높이 100~160px). 법대에 대법관 9명이 등받이 높은 의자에 앉은 모습을 SVG 도트로 그림(캐릭터 그림 미사용), 가운데 대법원장 의자 + 금색 저울 휘장. 대법관마다 엇박자로 1칸 들썩임·눈 깜빡임, 대법원장 판사봉 두드림. 어두운 화면에서는 밝기만 낮춤, 동작 줄이기 설정이면 멈춤
 - ✅ 상단 음소거 버튼 (브라우저에 기억)
+- ✅ **밝은/어두운 화면** (2026-11-19): 상단 해·달 버튼으로 전환, 브라우저에 기억, 고른 적 없으면 OS 설정을 따름. 기본(밝은) = 회백색 바닥 `#e8e1d6` + 반투명 흰 카드 + 검은 글씨, 어두운 = 원목 바닥 `#604a3c` + 반투명 검정 카드 + 종이색 글씨. 화면 CSS는 `theme.css`의 역할별 토큰(`--bg`·`--surface`·`--text`·`--title`·`--accent-text`·`--line` 등)만 쓰고, 다크는 `:root[data-theme='dark']`에서 값만 바꿈
 - ✅ 기록 초기화
 - ⏸ 배경음악
 - ⬜ 선택: 버튼 스타일, PC 2단 레이아웃, "판결문 중에서" 접기
@@ -217,28 +220,29 @@ supreme-justice/
 │  ├─ main.tsx                 진입점, 전역 CSS 로드
 │  ├─ App.tsx                  useProgress → ChambersScreen 연결
 │  ├─ screens/
-│  │  └─ ChambersScreen.tsx    유일한 화면: 헤더·프로필·사건/주말/엔딩 전환, 보류 사건, 스크롤
+│  │  └─ ChambersScreen.tsx    유일한 화면: 헤더·프로필·사건/활동/엔딩 전환, 보류 사건, 스크롤
 │  ├─ components/
 │  │  ├─ CasePanel.tsx         질문·보기·선고 버튼, 선고 후 보기 안 gif+도장
 │  │  ├─ CaseFile.tsx          사건 기록철 탭 3개 (당사자 줄 포함)
 │  │  ├─ VerdictPanel.tsx      판결문(주문·해설·인용·조문·원문), 집무실로 돌아가기
-│  │  ├─ WeekendPanel.tsx      주말 활동 4지선다
+│  │  ├─ WeekendPanel.tsx      활동 4지선다 (파일 이름은 예전 주말 시절 그대로)
 │  │  ├─ StatBars.tsx          능력치 막대
 │  │  ├─ RankChangeModal.tsx   진급·강등 모달
 │  │  ├─ LawRefs.tsx           관련 조문 링크 목록
 │  │  ├─ GameGuide.tsx         게임 안내
 │  │  ├─ MuteButton.tsx        음소거 토글
+│  │  ├─ ThemeButton.tsx       밝은/어두운 화면 토글
 │  │  ├─ JudgeCard.tsx         법관 신분증 카드
-│  │  ├─ CareerMap.tsx         경력 지도 (주×요일 칸)
+│  │  ├─ CareerMap.tsx         경력 지도 (한 줄 10칸 격자, 판결 1건 = 1칸)
 │  │  ├─ CaseLog.tsx           인생 기록 타임라인 (집무실 가운데)
-│  │  ├─ SurpriseModal.tsx     평일 기습 이벤트 창 (참여/거절)
+│  │  ├─ SurpriseModal.tsx     기습 이벤트 창 (참여/거절)
 │  │  └─ StatGuide.tsx         상태 설명 (여닫이)
 │  ├─ game/                    (화면과 분리된 로직)
 │  │  ├─ store.ts              useProgress 훅, localStorage 저장, pickNextCase
-│  │  ├─ progression.ts        applyResult(판결 반영) · applyActivity(주말) · 요일/주차
+│  │  ├─ progression.ts        applyResult(판결 반영) · applyActivity(활동) · 바퀴/차례 진행
 │  │  ├─ stats.ts              능력치 상수, chance/rollEffect
 │  │  ├─ weekendActivities.ts  활동 52개, pickWeekendChoices
-│  │  ├─ surpriseEvents.ts     기습 이벤트 44개, scheduleWeek · pickSurprise · surpriseEffects
+│  │  ├─ surpriseEvents.ts     기습 이벤트 44개, scheduleCycle · pickSurprise · surpriseEffects
 │  │  ├─ posts.ts              직급별 근무처 무작위 배정
 │  │  ├─ rankNames.ts          직급 이름 (스크립트용)
 │  │  ├─ korean.ts             조사 '으로/로'
@@ -246,7 +250,8 @@ supreme-justice/
 │  │  ├─ verdictGif.ts         casePersona, verdictGif
 │  │  ├─ people.ts             당사자 인물 그림 경로
 │  │  ├─ lawLink.ts            "형법 제347조" → 국가법령정보센터 주소
-│  │  └─ sound.ts              판사봉 소리, 음소거 상태
+│  │  ├─ sound.ts              판사봉 소리, 음소거 상태
+│  │  └─ theme.ts              밝은/어두운 화면 상태 (data-theme)
 │  ├─ types/case.ts            Case / Persona zod 스키마
 │  ├─ data/
 │  │  ├─ cases.json            게임에 쓰는 사건 (data:build 산출물)
@@ -291,18 +296,19 @@ flowchart TD
 ```
 
 - **순수 로직**(`progression.ts`, `stats.ts`, `weekendActivities.ts`)은 React와 무관하고 난수(`rand`)를 인자로 받아 테스트 가능.
-- `recordAnswer` → `applyResult`: 진급/강등 판정 → 건강 −1 → 다음 요일 → 토요일이면 주말 선택지 생성.
-- `chooseActivity` → `applyActivity`: 효과 적용 → 토→일 새 선택지 / 일→다음 주 월요일(이번 주 기습 이벤트 요일 `scheduleWeek`).
-- 평일로 넘어갈 때 `arriveWeekday`: 오늘이 기습 요일이면 `pickSurprise`로 이벤트 설정 → `answerSurprise` → `applySurprise`(유혹 이벤트 들통 판정).
+- `recordAnswer` → `applyResult`: 진급/강등 판정 → 건강 −1 → 다음 차례 → 사건 3건을 마쳤으면 활동 선택지 생성(`startActivityTime`).
+- `chooseActivity` → `applyActivity`: 효과 적용 → 다음 바퀴 첫 사건 차례(이번 바퀴 기습 이벤트 차례 `scheduleCycle`).
+- 사건 차례로 넘어갈 때 `arriveWeekday`: 이번이 기습 이벤트 차례면 `pickSurprise`로 이벤트 설정 → `answerSurprise` → `applySurprise`(유혹 이벤트 들통 판정).
 - `rollInsight`: 통찰력 판정만 (진행 상태는 바꾸지 않음). 화면이 사건당 1회로 제한.
 
 ### 4.3 저장 (localStorage)
 
 | 키 | 내용 |
 |---|---|
-| `supreme-justice:v1` | Progress — rankIndex, gender(male/female), name, levelCorrect, levelWrong, solved{사건id: 고른 보기·적중}, correct, total, stats, week, day(0 월 … 6 일), weekendOffer, weekendDone, lastActivity, log[](판결 기록, 최근 500개), post(근무처), surpriseDays(이번 주 남은 이벤트 요일), surprise(답하지 않은 오늘 이벤트), surpriseSeen(이벤트별 마지막 주차) |
+| `supreme-justice:v1` | Progress — rankIndex, gender(male/female), name, levelCorrect, levelWrong, solved{사건id: 고른 보기·적중}, correct, total, stats, week(몇 번째 바퀴), day(0~2 사건 차례, 3 활동 차례), weekendOffer(활동 선택지), weekendDone, lastActivity, log[](판결 기록, 최근 500개), post(근무처), surpriseDays(이번 바퀴에 기습 이벤트가 뜰 사건 차례), surprise(답하지 않은 이벤트), surpriseSeen(이벤트별 마지막으로 나온 바퀴), counters(업적 판정용 카운터) |
 | `supreme-justice:pending` | 보류한 사건의 id (선고 전 돌아간 경우) |
 | `supreme-justice:muted` | 음소거 여부 |
+| `supreme-justice:theme` | 화면 테마 (`light`/`dark`, 없으면 OS 설정) |
 | `supreme-justice:achievements` | 해금한 업적 (기록 초기화와 무관하게 유지) |
 
 ### 4.4 데이터 모델 (`Case`)
@@ -336,13 +342,14 @@ data:rebalance   형사 정답 위치 무작위화 (새 사건만 --only)
 data:validate    오류 있으면 실패, 경고는 통과
    ▼
 data:build -- --all ──▶ src/data/cases.json
+   │  (validate → build -- --all → npm run build 를 한 번에: data:release)
    ▼
 data:laws ──▶ src/data/law-no-article.json
 
 보조: data:persona (민사 persona만 다시), data:avatars (인물 그림만 다시, --force), data:details (자세한 개요, 없는 사건만; --only/--force)
 Gemini 모델: .env 의 GEMINI_MODEL (표기 이름 "Gemini 3.1 Flash-Lite"여도 scripts/lib.ts geminiModel()이 API ID로 바꿈)
 난이도: 변환(data:convert) 때 매긴 값을 그대로 씀. 전체 재평가(scripts/rank-difficulty.ts)는 사용 중지
-문서: docs:events → docs/EVENTS.md (기습 이벤트·주말 활동 표)
+문서: docs:events → docs/EVENTS.md (기습 이벤트·활동 표)
 ```
 
 ### 4.6 에셋 처리
@@ -355,3 +362,31 @@ Gemini 모델: .env 의 GEMINI_MODEL (표기 이름 "Gemini 3.1 Flash-Lite"여�
 | `process-gavel.ts` | `gif/판사봉.gif` → `src/assets/gavel.webp` (현재 화면에서 미사용) |
 
 배경 제거는 가장자리에서 flood-fill 해 바깥과 이어진 배경색만 투명화한다(옷의 흰색은 보존). 판사봉 소리는 루트의 `판사봉 소리.MP3`를 `src/assets/sfx/gavel.mp3`로 복사해 쓴다.
+
+### 4.7 웹 배포 · 사건 추가 절차
+
+**배포 구조**: 서버 없는 정적 사이트. GitHub(`polarbang/supreme-justice`, `main`)에 push하면 Vercel이 `npm run build`로 다시 빌드해서 배포한다(Output `dist`). API 키는 데이터 스크립트에서만 쓰므로 Vercel에 환경변수를 넣을 필요가 없다. 2026-11-19 기준 Vercel 연결은 **아직 안 함**.
+
+**최초 배포(1회)**
+1. `npm run build` → `npm run preview`(http://localhost:4173)로 배포판 미리 확인
+2. 변경사항 커밋 → `git push`
+3. vercel.com에 GitHub로 로그인 → Add New → Project → `supreme-justice` Import → 기본값(Vite) 그대로 Deploy
+
+**사건 추가 → 배포**
+
+게임은 빌드 때 `src/data/cases.json`만 묶는다. 데이터 스크립트는 로컬 `.env` 키가 필요해서 Vercel에서 돌지 않는다. 그래서 **로컬에서 `cases.json`까지 만들어 올려야** 반영된다.
+
+```powershell
+npm run data:fetch          # 원문 수집 → data/raw/
+npm run data:convert        # 문제 초안 → data/drafts/
+npm run data:rebalance -- --only <id>   # (형사) 정답 위치 보정
+npm run data:details        # 자세한 개요 (없는 사건만)
+npm run data:release        # validate → data:build -- --all → build (실패하면 멈춤)
+git add . ; git commit -m "사건 추가" ; git push   # → Vercel 자동 재배포 (1~2분)
+```
+
+주의
+- push 전에 `data:release` 출력의 `cases.json ← N건`이 **늘었는지** 확인한다. 줄었으면 push하지 않는다.
+- 초안은 전부 `reviewed:false`라서 `--all` 없이 `data:build`를 돌리면 `cases.json`이 **0건으로 덮어써진다**(2026-11-19에 한 번 발생, `--all`로 다시 만들어 복구). 검수제로 바꾸려면 초안에 `reviewed:true`를 표시하고 `data:release`에서 `--all`을 뺀다.
+- `data:release`가 실패하면 push하지 않는다. Vercel 빌드가 실패해도 이전 배포가 그대로 유지되니 사이트가 깨지지는 않는다.
+- 플레이어는 새로고침하면 새 사건을 받는다(저장 데이터는 각자 브라우저 localStorage).

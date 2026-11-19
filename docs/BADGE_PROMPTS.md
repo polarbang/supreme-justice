@@ -12,412 +12,441 @@
 
 ## 공통 스타일
 
-- 귀여운 2등신 픽셀아트 느낌 (게임의 판사 캐릭터와 같은 톤), 둥근 메달 모양, 글자·숫자 없음
-- 테두리 색으로 성격 구분: 좋음 = 금테, 중립 = 은테, 나쁨 = 금이 간 짙은 청동테 + 붉은 바탕
+- 귀여운 2등신 픽셀아트 느낌 (게임의 판사 캐릭터와 같은 톤), 글자·숫자 없음
+- 메달·테두리 없이 그림만. 모양은 자유지만 1:1 정사각형 안에 다 들어와야 함 (꽉 채울 필요는 없고, 가장자리에 닿거나 잘리면 안 됨)
+- 반짝이·광채 같은 덧붙인 장식 없음 (설명에 있는 것만 그림)
+- 색감으로 성격 구분: 좋음 = 금빛, 중립 = 은빛·회청색, 나쁨 = 칙칙한 청동·붉은빛 + 금 간 자국
 
-## 프롬프트 (45개)
+## 프롬프트 (48개)
 
 ### 1. 첫 단추 — `img/badges/first-hit.png`
 
 - 조건: 첫 판결 적중
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a single shirt button being fastened on a black judge robe.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a small whole black judge robe shown on its own like a floating garment icon, with a single shiny gold button just fastened at the top collar, the other buttonholes below still empty.
 ```
 
 ### 2. 명판관 — `img/badges/streak-5.png`
 
 - 조건: 5연속 적중
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a golden gavel with five small stars in an arc above it.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a wooden judge gavel resting diagonally, with five small golden stars in a gentle rising arc above it, each star slightly bigger and brighter than the one before, like a combo streak lighting up.
 ```
 
 ### 3. 신들린 판결 — `img/badges/streak-10.png`
 
 - 조건: 10연속 적중
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a glowing golden gavel surrounded by radiant light rays and sparkles.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a chibi judge in a black robe with eyes calmly closed in deep focus, confidently striking a golden gavel down onto a sound block with one hand, bold motion lines behind the gavel.
 ```
 
 ### 4. 형사 전문가 — `img/badges/criminal-20.png`
 
 - 조건: 형사 사건 20건 적중
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a pair of handcuffs crossed with a gavel.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a single pair of steel handcuffs lying half open, with a small golden key inserted in one cuff.
 ```
 
 ### 5. 민사의 달인 — `img/badges/civil-15.png`
 
 - 조건: 민사 사건 15건 적중
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a signed contract scroll with a red seal stamp and a fountain pen.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a small folded paper IOU note with a red thumbprint mark, tucked half inside a plump white money envelope.
 ```
 
 ### 6. 난제 해결사 — `img/badges/hard-10.png`
 
-- 조건: 난이도 3 사건 10건 적중
-- 성격: 좋음 (금테)
+- 조건: 가장 어려운 사건 10건 적중
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a tangled knot of rope being cleanly untied, with a small key.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a small magnifying glass hovering over the final golden jigsaw puzzle piece clicking into place in an almost finished puzzle square.
 ```
 
 ### 7. 무죄 추정 — `img/badges/acquittal-3.png`
 
-- 조건: 정답이 "무죄"인 사건 3건 적중
-- 성격: 좋음 (금테)
+- 조건: 무죄 사건을 3번 무죄로 판결
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a white dove flying out of an open birdcage.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a white dove flying out of an open birdcage.
 ```
 
 ### 8. 엇나간 감 — `img/badges/miss-5.png`
 
 - 조건: 5연속 미적중
-- 성격: 나쁨 (붉은 테)
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a compass with a spinning broken needle pointing the wrong way.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a small round dartboard with three darts all stuck outside the rim, none near the center.
 ```
 
-### 9. 판사님 그건 좀… — `img/badges/jailed-innocent.png`
+### 9. 판사님 그건 좀 — `img/badges/jailed-innocent.png`
 
-- 조건: 정답이 무죄인데 실형을 고른 것 3번
-- 성격: 나쁨 (붉은 테)
+- 조건: 무죄 사건에 3번 실형 선고
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a sweating judge face emoji next to cracked jail bars.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a small white dove sitting sadly behind iron jail bars, with a single droplet of a tear on its cheek.
 ```
 
 ### 10. 철퇴 판사 — `img/badges/too-harsh.png`
 
-- 조건: 실제보다 무거운 쪽을 고른 오답 10번
-- 성격: 나쁨 (붉은 테)
+- 조건: 실제 판결보다 무겁게 10번 선고
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a heavy iron mace smashing down, with impact lines.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a wooden gavel with an oversized heavy iron head, just slammed down onto a sound block that has cracked in half, with bold impact lines.
 ```
 
 ### 11. 솜방망이 — `img/badges/too-soft.png`
 
-- 조건: 실제보다 가벼운 쪽을 고른 오답 10번
-- 성격: 나쁨 (붉은 테)
+- 조건: 실제 판결보다 가볍게 10번 선고
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a fluffy cotton-candy club, soft and pink.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a wooden gavel whose head is a puffy white cotton ball, softly squishing as it touches a sound block.
 ```
 
 ### 12. 기각 전문 — `img/badges/dismiss-5.png`
 
-- 조건: 민사에서 "청구 기각"을 골라 틀린 것 5번
-- 성격: 나쁨 (붉은 테)
+- 조건: 민사에서 5번 잘못 청구 기각
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a big red rejection stamp hitting a document.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a small metal wastebasket overflowing with crumpled paper documents, one crumpled sheet fallen on the floor beside it.
 ```
 
-### 13. 첫 발령 — `img/badges/first-promotion.png`
+### 13. 새 명패 — `img/badges/first-promotion.png`
 
 - 조건: 첫 진급
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: an official appointment letter with a ribbon and a gold seal.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a wooden desk name plate with a brand new shiny gold trim, a small red ribbon bow tied on one corner.
 ```
 
 ### 14. 탄탄대로 — `img/badges/smooth-road.png`
 
 - 조건: 강등 없이 대법관 도달
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a straight golden road leading up to a courthouse on a hill.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a long straight red carpet rolled out without a single wrinkle, leading to the front steps of a small courthouse.
 ```
 
 ### 15. 초고속 승진 — `img/badges/fast-track.png`
 
 - 조건: 45세 이전 대법관 도달
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a rocket shooting upward past stair steps.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a chibi judge character wearing a black judge robe like a superhero cape, flying straight vertically upward with one fist raised overhead, the robe fluttering behind, bold vertical speed lines below.
 ```
 
 ### 16. 파격 인사 — `img/badges/double-promotion.png`
 
 - 조건: 2계급 특진
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a person leaping over two steps at once on a staircase, with motion lines.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: the collar of a black judge robe with two shiny gold rank pins being pinned on at once, side by side.
 ```
 
 ### 17. 사법부의 수장 — `img/badges/chief-justice.png`
 
 - 조건: 대법원장 취임
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a golden crown resting on top of a gavel and scales of justice.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a small grand courthouse building with white columns, golden trim on its triangular roof, and wide front steps.
 ```
 
 ### 18. 최연소 대법원장 — `img/badges/youngest-chief.png`
 
 - 조건: 45세 이하에 대법원장 취임
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a small sprout growing out of a golden crown.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a younger kid-faced chibi judge character with a black judge robe worn like a superhero cape, just landing on top of a small golden high-backed chair, cape still fluttering, a small golden crown on the head.
 ```
 
-### 19. 개근상 — `img/badges/verdicts-100.png`
+### 19. 닳고 닳은 봉 — `img/badges/verdicts-100.png`
 
-- 조건: 판결 100건
-- 성격: 중립 (은테)
+- 조건: 100건 판결
+- 성격: 중립 (은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: a tall stack of case files with a 100 ribbon.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a well-worn wooden gavel with a smooth polished handle, resting on a sound block with a deep dent worn into its center from countless strikes.
 ```
 
-### 20. 첫 좌천 — `img/badges/first-demotion.png`
+### 20. 이게 아닌데 — `img/badges/first-demotion.png`
 
 - 조건: 첫 강등
-- 성격: 나쁨 (붉은 테)
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a downward arrow on a cracked name plate.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a wooden desk name plate fallen face-down on the floor with a crack running through it.
 ```
 
 ### 21. 칠전팔기 — `img/badges/comeback.png`
 
-- 조건: 강등 3번 겪고 다시 가장 높았던 직급 회복
-- 성격: 중립 (은테)
+- 조건: 3번 강등 겪고 최고 직급 되찾기
+- 성격: 중립 (은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: a roly-poly tumbler doll standing back up.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a round-bottomed roly-poly tumbler toy shaped like a chibi judge in a black robe, swaying back upright after being tipped over, with small curved rocking lines at its base.
 ```
 
-### 22. 회전문 인사 — `img/badges/revolving-door.png`
+### 22. 쳇바퀴 인사 — `img/badges/revolving-door.png`
 
-- 조건: 같은 직급에서 강등·재진급 3번 반복
-- 성격: 나쁨 (붉은 테)
-
-```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a spinning revolving door with circular arrows.
-```
-
-### 23. 만년 단독 — `img/badges/forever-single.png`
-
-- 조건: 단독판사로 10년 이상 근무 (판결 40건)
-- 성격: 나쁨 (붉은 테)
+- 조건: 같은 직급에서 강등과 재진급 3번 반복
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a dusty desk name plate with cobwebs and a calendar with many torn pages.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a chibi judge character in a black robe running hard inside a small hamster exercise wheel, sweating with a tired face, with circular motion lines around the wheel.
+```
+
+### 23. 만년 배석 — `img/badges/forever-associate.png`
+
+- 조건: 진급 없이 배석판사로 5년 근무
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
+
+```
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a plain wooden desk name plate covered in thick dust and draped with cobwebs, a tiny spider hanging from one corner.
 ```
 
 ### 24. 정년 퇴임 — `img/badges/retired.png`
 
-- 조건: 대법원장이 되지 못하고 60세 퇴임
-- 성격: 나쁨 (붉은 테)
+- 조건: 대법원장이 되지 못한 채 정년 퇴임
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a judge robe hanging on a coat hook with a farewell flower bouquet.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a black judge robe neatly draped over the back of an empty wooden chair, a small farewell flower bouquet resting on the seat.
 ```
 
-### 25. 꿰뚫어 보는 눈 — `img/badges/insight-10.png`
+### 25. 다시 보니 — `img/badges/insight-1.png`
 
-- 조건: 통찰력으로 다시 고르기 10번
-- 성격: 좋음 (금테)
-
-```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a sharp glowing eye inside a magnifying glass.
-```
-
-### 26. 든든한 뒷배 — `img/badges/shield-3.png`
-
-- 조건: 인맥으로 강등 면제 3번
-- 성격: 중립 (은테)
+- 조건: 통찰력으로 판결 1번 다시 고르기
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: a sturdy shield held up by several hands from behind.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a chibi judge character in a black robe pushing up round glasses with one finger while taking a second closer look at a case file held in the other hand.
 ```
 
-### 27. 좋은 평판 — `img/badges/early-promotion.png`
+### 26. 꿰뚫어 보는 눈 — `img/badges/insight-10.png`
 
-- 조건: 평판으로 조기 진급 1번
-- 성격: 좋음 (금테)
+- 조건: 통찰력으로 판결 10번 다시 고르기
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a thumbs-up inside a laurel wreath.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a small hawk wearing a tiny black judge cap, perched on a stack of case files and staring down at them with sharp focused eyes.
 ```
 
-### 28. 철인 — `img/badges/health-100.png`
+### 27. 인맥 찬스 — `img/badges/shield-1.png`
+
+- 조건: 인맥 덕분에 1번 강등 면하기
+- 성격: 중립 (은빛)
+
+```
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a smartphone showing an incoming call screen with a blank contact silhouette, a single small blank business card leaning against it.
+```
+
+### 28. 든든한 뒷배 — `img/badges/shield-5.png`
+
+- 조건: 인맥 덕분에 5번 강등 면하기
+- 성격: 중립 (은빛)
+
+```
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a thick bulging business card holder book stuffed with so many blank business cards that they are sticking out on every side.
+```
+
+### 29. 좋은 평판 — `img/badges/early-promotion.png`
+
+- 조건: 평판 덕분에 1번 조기 진급
+- 성격: 좋음 (금빛)
+
+```
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a small round bird wearing a tiny black judge cap, holding a golden promotion envelope in its beak, perched on a branch with a sun just starting to peek over the horizon.
+```
+
+### 30. 자자한 명성 — `img/badges/early-promotion-3.png`
+
+- 조건: 평판 덕분에 3번 조기 진급
+- 성격: 좋음 (금빛)
+
+```
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: three small round birds wearing tiny black judge caps, perched in a row on a branch, each holding a golden promotion envelope in its beak, a sun just peeking over the horizon.
+```
+
+### 31. 철인 — `img/badges/health-100.png`
 
 - 조건: 건강 100 달성
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a flexed muscular arm with a heart.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a chibi judge character in a black robe with sleeves rolled up, lifting a dumbbell high with one hand and flexing proudly.
 ```
 
-### 29. 마당발 — `img/badges/network-100.png`
+### 32. 마당발 — `img/badges/network-100.png`
 
 - 조건: 인맥 100 달성
-- 성격: 중립 (은테)
+- 성격: 중립 (은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: a big foot surrounded by many small connected people icons.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a small photo frame showing a crowded group photo, a chibi judge in a black robe in the very center making a peace sign, many smiling people squeezed in around it.
 ```
 
-### 30. 국민 판사 — `img/badges/reputation-100.png`
+### 33. 국민 판사 — `img/badges/reputation-100.png`
 
 - 조건: 평판 100 달성
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a crowd of tiny people cheering under a heart.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a folded newspaper front page with a large smiling portrait drawing of a chibi judge, the headline area shown as thick blank lines.
 ```
 
-### 31. 과로 판사 — `img/badges/overwork.png`
+### 34. 카페인 중독 — `img/badges/overwork.png`
 
-- 조건: 건강 35 이하로 떨어짐
-- 성격: 나쁨 (붉은 테)
-
-```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a tired face with dark eye bags next to a steaming coffee cup and a pile of papers.
-```
-
-### 32. 번아웃 — `img/badges/burnout.png`
-
-- 조건: 건강 40 미만 상태에서 판결 누적 10건
-- 성격: 나쁨 (붉은 테)
+- 조건: 건강 35 이하로 떨어지기
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a burnt-out match with a thin wisp of smoke.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a chibi judge character in a black robe with heavy dark eye bags, half buried behind tall piles of case files, clutching a coffee mug with a tired blank stare.
 ```
 
-### 33. 바닥난 평판 — `img/badges/bad-reputation.png`
+### 35. 번아웃 — `img/badges/burnout.png`
+
+- 조건: 건강 40 미만인 채로 10건 판결
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
+
+```
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a chibi judge character in a black robe melted and slumped limply over a chair like a puddle, with a dazed face.
+```
+
+### 36. 바닥난 평판 — `img/badges/bad-reputation.png`
 
 - 조건: 평판 20 미만
-- 성격: 나쁨 (붉은 테)
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a newspaper with a big red headline and a downward graph.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a chibi judge character in a black robe shielding its face with one sleeve, a squashed tomato splattered on the robe and another tomato flying toward it.
 ```
 
-### 34. 청렴 판사 — `img/badges/clean-10.png`
+### 37. 청렴 판사 — `img/badges/clean-10.png`
 
 - 조건: 유혹 제안 10번 거절
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a hand pushing away an envelope of money, with a white lily.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a chibi judge character in a black robe firmly pushing back a cardboard apple box with both hands, shaking its head, a thick envelope peeking out from between the apples.
 ```
 
-### 35. 정치와 거리 두기 — `img/badges/no-politics.png`
+### 38. 여의도 안가요 — `img/badges/no-politics.png`
 
-- 조건: 정당 영입·입각 타진·정치권 회동 제안을 받은 적이 있고 모두 거절
-- 성격: 좋음 (금테)
+- 조건: 한 판에서 정치권 제안 3가지 모두 거절
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: a judge gavel standing apart from a parliament building, with a line between them.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a small open gift box holding a shiny round gold lapel pin, with a red return arrow sticker on the lid, being pushed back.
 ```
 
-### 36. 첫 청탁 — `img/badges/first-bribe.png`
+### 39. 사과 박스 — `img/badges/first-bribe.png`
 
 - 조건: 유혹 제안 첫 수락
-- 성격: 나쁨 (붉은 테)
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a hand secretly taking an envelope under a table.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a cardboard apple box with its lid half open, shiny red apples on top and a thick envelope peeking out from between the apples.
 ```
 
-### 37. 단골 기삿거리 — `img/badges/exposed-3.png`
+### 40. 단골 기삿거리 — `img/badges/exposed-3.png`
 
-- 조건: 들통 3번
-- 성격: 나쁨 (붉은 테)
-
-```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: camera flashes and a microphone pointed at a newspaper headline.
-```
-
-### 38. 사법 농단 — `img/badges/judicial-abuse.png`
-
-- 조건: 유혹 제안 5번 수락하고 대법관 이상 도달
-- 성격: 나쁨 (붉은 테)
+- 조건: 유혹 제안 수락이 3번 들통나기
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a cracked scale of justice tilted by a bag of gold coins.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a startled chibi judge character in a black robe caught in the middle, surrounded by several cameras with long telephoto lenses aimed at it from all sides, bold camera flash bursts going off.
 ```
 
-### 39. 운 좋은 사람 — `img/badges/lucky.png`
+### 41. 사법 농단 — `img/badges/judicial-abuse.png`
 
-- 조건: 유혹 제안 5번 수락했는데 한 번도 안 들킴
-- 성격: 나쁨 (붉은 테)
-
-```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood. Inside the badge: a four-leaf clover hiding behind a sneaky grin mask.
-```
-
-### 40. 거절의 달인 — `img/badges/decliner.png`
-
-- 조건: 일반 기습 일정 10번 거절
-- 성격: 중립 (은테)
+- 조건: 유혹 제안 5번 수락하고 대법관 되기
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: a polite hand raised in a stop gesture, with a calendar.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: a wooden judge gavel hanging from puppet strings like a marionette, the strings leading up to a large hand at the top controlling them with its fingers.
 ```
 
-### 41. 예스맨 — `img/badges/yes-man.png`
+### 42. 완전 범죄 — `img/badges/lucky.png`
 
-- 조건: 일반 기습 일정 10번 연속 참여
-- 성격: 중립 (은테)
+- 조건: 유혹 제안 5번 수락하고 한 번도 안 들키기
+- 성격: 나쁨 (칙칙한 청동·붉은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: a bobblehead nodding yes with a big speech bubble saying OK.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood. Subject: several cameras all aimed the wrong way, while a chibi judge character in a black robe tiptoes sneakily behind them carrying an envelope.
 ```
 
-### 42. 공부벌레 — `img/badges/bookworm.png`
+### 43. 거절의 달인 — `img/badges/decliner.png`
+
+- 조건: 기습 일정 10번 거절
+- 성격: 중립 (은빛)
+
+```
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a chibi judge character in a black robe smiling apologetically while waving both hands in front of it in a polite no-thank-you gesture.
+```
+
+### 44. 예스맨 — `img/badges/yes-man.png`
+
+- 조건: 기습 일정 10번 연속 참여
+- 성격: 중립 (은빛)
+
+```
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a chibi judge character in a black robe eagerly stretching one hand as high as it can go, standing on tiptoes, with an excited face.
+```
+
+### 45. 공부벌레 — `img/badges/bookworm.png`
 
 - 조건: 통찰력 활동 10번
-- 성격: 중립 (은테)
+- 성격: 중립 (은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: a cute worm wearing glasses peeking out of a thick law book.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a chibi judge character in a black robe sitting between tall stacks of law books, rubbing its eyes while reading by a small desk lamp.
 ```
 
-### 43. 사교의 왕 — `img/badges/social.png`
+### 46. 사교의 왕 — `img/badges/social.png`
 
 - 조건: 인맥 활동 10번
-- 성격: 중립 (은테)
+- 성격: 중립 (은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: two clinking glasses with a small crown above them.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a chibi judge character in a black robe wearing a golf visor, mid-swing with a golf club, a small golf ball flying off, surrounded by a few other chibi golfers in visors clapping and cheering.
 ```
 
-### 44. 봉사하는 판사 — `img/badges/volunteer.png`
+### 47. 시민의 판사 — `img/badges/volunteer.png`
 
 - 조건: 평판 활동 10번
-- 성격: 좋음 (금테)
+- 성격: 좋음 (금빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood. Inside the badge: two hands holding a warm glowing heart.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Bright golden accents, cheerful mood. Subject: a chibi judge character in a black robe wearing cotton work gloves, cheerfully carrying a stack of black coal briquettes.
 ```
 
-### 45. 쉬어 가기 — `img/badges/rest-10.png`
+### 48. 휴정 중 — `img/badges/rest-10.png`
 
 - 조건: 건강 활동 10번
-- 성격: 중립 (은테)
+- 성격: 중립 (은빛)
 
 ```
-Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. A single round medal badge centered, thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame. Silver rim with a simple pattern, light gray-blue inner disc, calm mood. Inside the badge: a hammock between two trees with a sleeping cat.
+Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays. Cool silver and soft gray-blue accents, calm mood. Subject: a chibi judge character asleep in a hammock strung between two small trees, its black robe draped over it like a blanket.
 ```

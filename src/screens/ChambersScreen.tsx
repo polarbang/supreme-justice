@@ -24,6 +24,8 @@ import VerdictPanel from '../components/VerdictPanel';
 import RankChangeModal from '../components/RankChangeModal';
 import GameGuide from '../components/GameGuide';
 import MuteButton from '../components/MuteButton';
+import ThemeButton from '../components/ThemeButton';
+import CourtBanner from '../components/CourtBanner';
 import JudgeCard from '../components/JudgeCard';
 import CareerMap from '../components/CareerMap';
 import CaseLog from '../components/CaseLog';
@@ -159,6 +161,7 @@ export default function ChambersScreen({ progress, recordAnswer, rollInsight, ch
 
   return (
     <main className={`screen chambers dashboard${active ? ' is-trial' : ''}`}>
+      <CourtBanner />
       <header className="app-header topbar">
         <h1 className="app-title">
           <span className="app-emblem" aria-hidden>
@@ -186,6 +189,7 @@ export default function ChambersScreen({ progress, recordAnswer, rollInsight, ch
           <span key={active ? 'court' : 'office'} className="header-label">
             {active ? '재판장' : '집무실'}
           </span>
+          <ThemeButton />
           <MuteButton />
         </div>
       </header>

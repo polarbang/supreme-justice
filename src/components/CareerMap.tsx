@@ -55,10 +55,10 @@ export default function CareerMap({ progress }: { progress: Progress }) {
           <span className="cmap-cell is-miss" /> 미적중
         </li>
         <li>
-          <span className="cmap-cell is-empty has-promote" /> 진급
+          <span className="cmap-cell is-ok has-promote" /> 진급
         </li>
         <li>
-          <span className="cmap-cell is-empty has-demote" /> 강등
+          <span className="cmap-cell is-miss has-demote" /> 강등
         </li>
       </ul>
     </section>

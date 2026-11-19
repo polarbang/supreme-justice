@@ -1,7 +1,7 @@
 import type { Gender } from './ranks';
 import { CORRECT_INSIGHT_GAIN, INITIAL_STATS, MAX_CHANCE, VERDICT_HEALTH_COST, applyEffects, rollEffect, type Stats } from './stats';
 import { pickPost } from './posts';
-import { pickSurprise, scheduleCycle, SURPRISE_EVENTS, surpriseEffects, TEMPT_EXPOSE_CHANCE, type SurpriseEvent } from './surpriseEvents';
+import { pickSurprise, POLITICAL_EVENTS, scheduleCycle, SURPRISE_EVENTS, surpriseEffects, TEMPT_EXPOSE_CHANCE, type SurpriseEvent } from './surpriseEvents';
 import { activityEffects, pickWeekendChoices, WEEKEND_ACTIVITIES, type WeekendActivity } from './weekendActivities';
 
 /** 직급(index 0~6)별 진급에 필요한 적중 수. 7번 진급하면 대법원장(index 7) → 게임 클리어 */
@@ -98,7 +98,7 @@ export interface Progress {
   surpriseDays: number[];
   /** 오늘 뜬, 아직 답하지 않은 기습 이벤트 */
   surprise?: { id: string; week: number; day: number };
-  /** 이벤트 id → 마지막으로 나온 주차 (같은 이벤트 반복 방지) */
+  /** 이벤트 id → 마지막으로 나온 바퀴(week) (같은 이벤트 반복 방지) */
   surpriseSeen: Record<string, number>;
   /** 업적 판정용 카운터 (연속 적중, 능력치 발동, 강등, 기습 일정 응답 등) */
   counters: Record<string, number>;
@@ -109,8 +109,6 @@ export interface Progress {
 /** 카운터 더하기 (없으면 0부터) */
 export const bump = (c: Record<string, number>, key: string, n = 1) => ({ ...c, [key]: (c[key] ?? 0) + n });
 export const count = (p: { counters?: Record<string, number> }, key: string) => p.counters?.[key] ?? 0;
-/** 정치권 관련 유혹 제안 (업적 "정치와 거리 두기") */
-export const POLITICAL_EVENTS = new Set(['party-recruit', 'power-meeting', 'cabinet', 'outside-pressure']);
 
 export const INITIAL_PROGRESS: Progress = {
   rankIndex: 0,
@@ -311,10 +309,7 @@ export function applySurprise(p: Progress, accepted: boolean, rand: () => number
   if (event.kind === 'temptation') {
     counters = bump(counters, accepted ? 'temptAccepted' : 'temptDeclined');
     if (exposed) counters = bump(counters, 'exposed');
-    if (POLITICAL_EVENTS.has(event.id)) {
-      counters = bump(counters, 'politicalOffers');
-      if (accepted) counters = bump(counters, 'politicalAccepted');
-    }
+    if (POLITICAL_EVENTS.has(event.id) && !accepted) counters = bump(counters, `politicalDeclined:${event.id}`);
   } else {
     counters = accepted
       ? bump(counters, 'normalAcceptStreak')

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700;900&display=swap');
 
+/* ───────── 팔레트 (테마와 무관한 고정 색) ───────── */
 :root {
   /* 법대 원목 */
   --wood-dark: #4a2e1f;
@@ -27,13 +28,107 @@
   --pixel-border: 2px solid var(--gold);
 }
 
+/* ───────── 화면 색 토큰: 밝은 테마 (기본) ─────────
+   화면 CSS는 아래 토큰만 쓰고, 다크 모드는 [data-theme='dark']에서 값만 바꾼다. */
+:root {
+  color-scheme: light;
+  /* 바닥 · 카드 */
+  --bg: #e8e1d6; /* 회백색에 갈색 한 숟가락 */
+  --surface: rgba(255, 255, 255, 0.25); /* 떠 있는 카드 (반투명, 바닥색이 비침) */
+  --surface-raised: #fbf8f2; /* 신분증 · 모달 */
+  --surface-alert: #f3e6e3; /* 강등 · 유혹 모달 */
+  --well: rgba(60, 40, 20, 0.07); /* 카드 안 오목한 칸 */
+  --well-strong: rgba(60, 40, 20, 0.13); /* 막대 바탕 · 입력칸 */
+  --current-bg: rgba(92, 31, 58, 0.12); /* 직급표의 현재 직급 */
+  /* 글자 */
+  --text: var(--ink);
+  --text-soft: var(--ink-soft);
+  --text-faint: #7a7062;
+  --title: #6e5010; /* 제목 (어두운 바탕에선 금색) */
+  --accent-text: #6e5010; /* 수치 · 강조 */
+  --title-shadow: none;
+  --ok-text: var(--correct);
+  --miss-text: var(--wrong);
+  --miss-mark: #b54a4a;
+  --event-text: #6a4a94;
+  --warn-text: #a3412a;
+  --alert-title: #8a3b3b;
+  --alert-text: #6b3030;
+  /* 선 · 그림자 */
+  --line: rgba(122, 90, 20, 0.28);
+  --line-strong: rgba(122, 90, 20, 0.45);
+  --line-faint: rgba(122, 90, 20, 0.15);
+  --shadow: rgba(0, 0, 0, 0.18);
+  --shadow-deep: rgba(0, 0, 0, 0.28);
+  --focus: #6e5010;
+  /* 사건 기록 종이 · 보기 · 판결문 */
+  --paper-bg: var(--paper);
+  --paper-tab: #d9cfb3;
+  --paper-text: var(--ink);
+  --paper-text-soft: var(--ink-soft);
+  --paper-rule: var(--paper-line);
+  --paper-accent: var(--robe-purple);
+  --paper-tint: rgba(255, 255, 255, 0.4);
+  --paper-tint-strong: rgba(255, 255, 255, 0.5);
+  --paper-tint-hover: #fff;
+  --paper-quote: rgba(0, 0, 0, 0.04);
+  --choice-selected-bg: #efe3e8;
+  --choice-ok-bg: #e3efe2;
+  --choice-miss-bg: #f3e1e1;
+}
+
+/* ───────── 다크 테마 (원목 법정, 예전 화면) ───────── */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #604a3c;
+  --surface: rgba(0, 0, 0, 0.28);
+  --surface-raised: linear-gradient(180deg, #3a2417, #1f130c);
+  --surface-alert: linear-gradient(180deg, #2c2020, #171111);
+  --well: rgba(0, 0, 0, 0.28);
+  --well-strong: rgba(0, 0, 0, 0.42);
+  --current-bg: rgba(92, 31, 58, 0.55);
+  --text: var(--paper);
+  --text-soft: rgba(245, 240, 225, 0.75);
+  --text-faint: rgba(245, 240, 225, 0.45);
+  --title: var(--gold);
+  --accent-text: var(--gold-soft);
+  --title-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+  --ok-text: #8fd19e;
+  --miss-text: #f19a9a;
+  --miss-mark: #c96b6b;
+  --event-text: #d9c8f0;
+  --warn-text: #f0b9a8;
+  --alert-title: #d9b3b3;
+  --alert-text: #e8d4d4;
+  --line: rgba(201, 165, 72, 0.35);
+  --line-strong: rgba(201, 165, 72, 0.5);
+  --line-faint: rgba(201, 165, 72, 0.18);
+  --shadow: rgba(0, 0, 0, 0.45);
+  --shadow-deep: rgba(0, 0, 0, 0.6);
+  --focus: var(--gold-soft);
+  /* 짙은 종이: 어두운 갈색 바탕 + 밝은 글씨 */
+  --paper-bg: #2a2320;
+  --paper-tab: #3a302a;
+  --paper-text: #ece5d6;
+  --paper-text-soft: #b5aa98;
+  --paper-rule: #4d4036;
+  --paper-accent: #d7a6bf;
+  --paper-tint: rgba(255, 255, 255, 0.04);
+  --paper-tint-strong: rgba(255, 255, 255, 0.06);
+  --paper-tint-hover: rgba(255, 255, 255, 0.12);
+  --paper-quote: rgba(255, 255, 255, 0.04);
+  --choice-selected-bg: #3c2531;
+  --choice-ok-bg: #22342a;
+  --choice-miss-bg: #3a2324;
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body, #root { margin: 0; min-height: 100%; }
 
 body {
-  background: var(--wood-dark);
-  color: var(--paper);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;

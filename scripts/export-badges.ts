@@ -10,16 +10,18 @@ const OUT = 'docs/BADGE_PROMPTS.md';
 
 /** 모든 뱃지에 공통으로 붙는 스타일 (한 세트로 보이게) */
 const STYLE =
-  'Cute chibi pixel-art style game achievement badge, matching a Korean courtroom game with chibi judges in black robes. ' +
-  'A single round medal badge centered, thick clean outline, soft shading, limited warm palette, ' +
-  'no text, no letters, no numbers, transparent background, square 1:1 image, the badge fills about 85% of the frame.';
+  'Cute chibi pixel-art style game achievement icon, matching a Korean courtroom game with chibi judges in black robes. ' +
+  'Draw only the subject itself as a freestanding illustration: no medal, no badge frame, no circular border, no background shape. ' +
+  'Thick clean outline, soft shading, limited warm palette, no text, no letters, no numbers, transparent background, square 1:1 image. ' +
+  'The whole illustration must fit completely inside the square with a small margin on every side; nothing may touch or be cut off at the edges. ' +
+  'Do not add any extra decorations that are not in the subject description: no sparkles, no twinkles, no glints, no floating stars, no light rays.';
 
 const TONE_STYLE: Record<Tone, string> = {
-  good: 'Polished gold rim with a laurel pattern, warm cream inner disc, cheerful mood.',
-  neutral: 'Silver rim with a simple pattern, light gray-blue inner disc, calm mood.',
-  bad: 'Dark bronze rim with small cracks, deep red inner disc, slightly comical gloomy mood.',
+  good: 'Bright golden accents, cheerful mood.',
+  neutral: 'Cool silver and soft gray-blue accents, calm mood.',
+  bad: 'Dull bronze and muted red accents with small cracks or smudges, slightly comical gloomy mood.',
 };
-const TONE_KO: Record<Tone, string> = { good: '좋음 (금테)', neutral: '중립 (은테)', bad: '나쁨 (붉은 테)' };
+const TONE_KO: Record<Tone, string> = { good: '좋음 (금빛)', neutral: '중립 (은빛)', bad: '나쁨 (칙칙한 청동·붉은빛)' };
 
 const sections = ACHIEVEMENTS.map(
   (a, i) => `### ${i + 1}. ${a.name} — \`img/badges/${a.id}.png\`
@@ -28,7 +30,7 @@ const sections = ACHIEVEMENTS.map(
 - 성격: ${TONE_KO[a.tone]}
 
 \`\`\`
-${STYLE} ${TONE_STYLE[a.tone]} Inside the badge: ${a.motif}.
+${STYLE} ${TONE_STYLE[a.tone]} Subject: ${a.motif}.
 \`\`\``,
 );
 
@@ -46,8 +48,10 @@ const md = `# 업적 뱃지 이미지 프롬프트 (ChatGPT 이미지 생성용)
 
 ## 공통 스타일
 
-- 귀여운 2등신 픽셀아트 느낌 (게임의 판사 캐릭터와 같은 톤), 둥근 메달 모양, 글자·숫자 없음
-- 테두리 색으로 성격 구분: 좋음 = 금테, 중립 = 은테, 나쁨 = 금이 간 짙은 청동테 + 붉은 바탕
+- 귀여운 2등신 픽셀아트 느낌 (게임의 판사 캐릭터와 같은 톤), 글자·숫자 없음
+- 메달·테두리 없이 그림만. 모양은 자유지만 1:1 정사각형 안에 다 들어와야 함 (꽉 채울 필요는 없고, 가장자리에 닿거나 잘리면 안 됨)
+- 반짝이·광채 같은 덧붙인 장식 없음 (설명에 있는 것만 그림)
+- 색감으로 성격 구분: 좋음 = 금빛, 중립 = 은빛·회청색, 나쁨 = 칙칙한 청동·붉은빛 + 금 간 자국
 
 ## 프롬프트 (${ACHIEVEMENTS.length}개)
 

@@ -23,6 +23,24 @@ export default function AchievementsPanel({ progress }: { progress: Progress }) 
           {n} / {ACHIEVEMENTS.length}
         </span>
       </div>
+      {/* 못 얻은 뱃지 윤곽선: 그림 모양을 두 겹으로 불려 테두리만 남기고, 안쪽은 옅게 채운다 (색은 layout.css) */}
+      <svg width="0" height="0" aria-hidden style={{ position: 'absolute' }}>
+        <filter id="badge-outline" colorInterpolationFilters="sRGB">
+          <feComponentTransfer in="SourceAlpha" result="shape">
+            <feFuncA type="linear" slope="4" intercept="-1" />
+          </feComponentTransfer>
+          <feMorphology in="shape" operator="dilate" radius="1.5" result="grown" />
+          <feComposite in="grown" in2="shape" operator="out" result="ring" />
+          <feFlood className="badge-outline-line" />
+          <feComposite in2="ring" operator="in" result="line" />
+          <feFlood className="badge-outline-fill" />
+          <feComposite in2="shape" operator="in" result="fill" />
+          <feMerge>
+            <feMergeNode in="fill" />
+            <feMergeNode in="line" />
+          </feMerge>
+        </filter>
+      </svg>
       <ul className="badge-grid">
         {visible.map((a) => {
           const on = !!got[a.id];
